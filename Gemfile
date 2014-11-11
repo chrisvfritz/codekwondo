@@ -69,7 +69,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'guard-rspec'        # Watches our app for changes, to automatically and selectively run tests
-  gem 'rb-fsevent' if `uname` =~ /Darwin/
 end
 
 # NOTES
