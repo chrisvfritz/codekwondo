@@ -25,7 +25,7 @@ gem 'cocoon', '~> 1.2.6'                                               # Simplif
 gem 'gretel', '~> 3.0.8'                                               # Simplifies breadcrumbing
 
 # ASSET PREPARATION
-gem 'sass-rails', '~> 4.0.3'   # Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.4'   # Use SCSS for stylesheets
 gem 'coffee-rails', '~> 4.0.0' # Use CoffeeScript for .js.coffee assets and views
 gem 'uglifier', '>= 1.3.0'     # Use Uglifier as compressor for JavaScript assets
 gem 'autoprefixer-rails'       # Adds browser vendor prefixes automatically
@@ -69,6 +69,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'guard-rspec'        # Watches our app for changes, to automatically and selectively run tests
+  # gem 'rb-fsevent' if `uname` =~ /Darwin/
 end
 
 # NOTES
