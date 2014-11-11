@@ -1,0 +1,8 @@
+$sortable_highlight: #E7E5E5;
+
+.table-striped > tbody > tr.ui-sortable-handle {
+  &:hover, &:active { background: $sortable_highlight; }
+}
+
+.ui-sortable-handle:hover  { cursor: grab;     }
+.ui-sortable-handle:active { cursor: grabbing; }

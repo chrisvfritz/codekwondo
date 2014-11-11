@@ -1,0 +1,28 @@
+= simple_form_for [@course, @skill] do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.association :primary_language, collection: Language.all
+    - other_skills = @skill.course.skills.where.not(id: f.object.id)
+    - if other_skills.any?
+      = f.association :prereqs, collection: other_skills, label: 'Prerequisites'
+    = f.input :presentation, label: 'Presentation (written in logic-less Slim for RevealJS)', input_html: { value: f.object.presentation || example_skill_slides }
+
+  .form-actions
+    = f.button :submit
+
+javascript:
+  CodeMirror.fromTextArea(document.getElementById('skill_presentation'), {
+    mode: 'application/x-slim',
+    theme: 'base16-light',
+    lineNumbers: false,
+    tabSize: 2,
+    lineWrapping: true,
+    extraKeys: {
+      Tab: function(cm) {
+        var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
+        cm.replaceSelection(spaces);
+      }
+    }
+  });

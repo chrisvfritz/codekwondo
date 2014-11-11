@@ -1,0 +1,12 @@
+.breadcrumb {
+  @extend .well;
+
+  > li + li {
+    &:before {
+      font-weight: normal;
+      padding-left: 12px;
+    }
+
+    &.active { font-weight: 600; }
+  }
+}

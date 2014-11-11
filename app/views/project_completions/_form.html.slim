@@ -1,0 +1,12 @@
+= simple_form_for [@project, @completion] do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :url
+    = f.simple_fields_for :criteria_completion do |c|
+      - f.object.project.criteria.each do |criterion|
+        - criterion_id = criterion.id.to_s
+        = c.input criterion_id, as: :boolean, input_html: { checked: f.object.criteria_completion[criterion_id].to_bool }, label: false, inline_label: criterion.description
+
+  .form-actions
+    = f.button :submit, 'Save showcase'

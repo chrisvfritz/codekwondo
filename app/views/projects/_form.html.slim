@@ -1,0 +1,20 @@
+= simple_form_for [@skill, @project] do |f|
+  = f.error_notification
+
+  - if @project.errors.any?
+    ul.text-danger
+      - @project.errors.full_messages.each do |msg|
+        li= msg
+
+  .form-inputs
+    = f.input :title
+    = f.input :description
+    h3 Criteria
+    #criteria
+      = f.simple_fields_for :criteria do |c|
+        = render 'criterion_fields', f: c
+      .links
+        = link_to_add_association 'add criterion', f, :criteria
+
+  .form-actions
+    = f.button :submit

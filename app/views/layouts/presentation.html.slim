@@ -1,0 +1,65 @@
+doctype html
+html lang="en"
+
+  head
+    meta charset="utf-8"
+    title Codekwando | Skill: #{@skill.title}
+    meta content="yes" name="apple-mobile-web-app-capable"
+    meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"
+    meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"
+    link href="/assets/revealjs/css/reveal.css" rel="stylesheet"
+    link#theme href="/assets/revealjs/css/theme/solarized.css" rel="stylesheet"
+
+    / For syntax highlighting
+    link href="/assets/revealjs/lib/css/zenburn.css" rel="stylesheet"
+
+    css:
+      /*********************************************
+       * OVERRIDES
+       *********************************************/
+      .reveal section p, .reveal section ol, .reveal section ul, .reveal section ol li, .reveal section ul li {
+        text-align: left;
+      }
+      .reveal img.full, video.full {
+        width: 100%;
+        max-height: 100%;
+      }
+
+    / If the query includes 'print-pdf', include the PDF print sheet
+    javascript:
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    == '<!--[if lt IE 9]><script src="/assets/revealjs/lib/js/html5shiv.js"></script><![endif]-->'
+
+  body
+    .reveal
+      / Any section element inside of this container is displayed as a slide
+      .slides
+        == yield
+
+    script src="/assets/revealjs/lib/js/head.min.js"
+    script src="/assets/revealjs/js/reveal.js"
+
+    javascript:
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: '/assets/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '/assets/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '/assets/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: '/assets/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });

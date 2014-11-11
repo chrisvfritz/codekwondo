@@ -1,0 +1,10 @@
+h1= current_user.name
+
+p Mastered skills:
+- skills = current_user.mastered_skills
+- if skills.any?
+  ul
+    - skills.each do |skill|
+      li= skill.title
+- else
+  p You haven't mastered any skills yet.

@@ -1,0 +1,12 @@
+= simple_form_for @course do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :abbrev, label: 'Abbreviation'
+    - other_courses = Course.where.not(id: f.object.id)
+    - if other_courses.any?
+      = f.association :prereqs, collection: other_courses
+
+  .form-actions
+    = f.button :submit

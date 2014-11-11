@@ -1,0 +1,16 @@
+- breadcrumb :course, @course
+
+.alert.alert-info
+  ' If you find a great resource for a skill in this course, you can save it via this bookmarklet (drag to the Bookmarks Bar to save it):
+  =' link_to "javascript:(function(){s=document.createElement('script');s.type='text/javascript';s.src='#{bookmarklet_resources_url(course_id: @course.id, format: :js)}';document.body.appendChild(s);})();", class: 'btn btn-xs btn-primary' do
+    .glyphicon.glyphicon-plus-sign'
+    | Save #{@course.abbrev} Resource
+
+h3
+  ' Skills
+  - if can? :create, Skill
+    = link_to new_course_skill_path(@course) do
+      .glyphicon.glyphicon-plus-sign
+
+== render 'skills/table', skills: @skills
+== render 'shared/dag', model_name: 'skill'

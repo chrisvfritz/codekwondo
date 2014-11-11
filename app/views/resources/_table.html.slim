@@ -1,0 +1,36 @@
+- if resources.any?
+
+  - can_edit_any    = resources.any?{|resource| can? :update,  resource}
+  - can_destroy_any = resources.any?{|resource| can? :destroy, resource}
+
+  table.table.table-striped
+    tbody
+      - resources.sort_by{|resource| [resource.rating, resource.created_at]}.reverse.each do |resource|
+        tr
+          td style='min-width: 75px'
+            =' resource.get_upvotes.count
+            - if !can?(:vote_on, resource) || current_user.liked?(resource)
+              span.glyphicon.glyphicon-thumbs-up'
+            - else
+              =' link_to like_resource_path(resource), method: :put do
+                span.glyphicon.glyphicon-thumbs-up
+            =' resource.get_downvotes.count
+            - if !can?(:vote_on, resource) || current_user.disliked?(resource)
+              span.glyphicon.glyphicon-thumbs-down
+            - else
+              = link_to dislike_resource_path(resource), method: :put do
+                span.glyphicon.glyphicon-thumbs-down
+          td style='width: 100%'
+            =' link_to resource.title, resource.url
+          - if can_edit_any
+            td
+              - if can? :update, resource
+                = link_to 'Edit', edit_resource_path(resource)
+          - if can_destroy_any
+            td
+              - if can? :destroy, resource
+                = link_to 'Delete', resource, data: {confirm: "Are you sure you want to permanently delete the \"#{resource.title}\" resource?"}, method: :delete, class: 'text-danger'
+
+- else
+
+  p No resources have been created yet.
