@@ -57,6 +57,7 @@ group :development do
   gem 'binding_of_caller' # Necessary for better_error's REPL
   gem 'pry-rails'         # Uses pry for the rails console
   gem 'colorize'          # Provides easier-to-parse rake output
+  gem 'rails_12factor'    # Makes assets and logs functional on Heroku
   # gem 'rack-mini-profiler' # Gives a performance breakdown in development
 end
 
