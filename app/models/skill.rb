@@ -1,7 +1,7 @@
 class Skill < ActiveRecord::Base
-  include DagMethods
+  include Skill::DagMethods
   include PaperTrail
-  include Validations
+  include Skill::Validations
 
   belongs_to :course
   belongs_to :primary_language, class_name: 'Language'
