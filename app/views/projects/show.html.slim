@@ -1,0 +1,8 @@
+= render 'overview', project: @project
+
+- breadcrumb :project, @project
+
+= responsive_grid @project.completions.select{|completion| completion.completed?}, lg: 5, md: 4, sm: 3, xs: 2 do |completion|
+
+  h4= link_to completion.user.name, completion.url
+  = image_tag 'loading.gif', data: { original: screenshot_project_completion_path(completion, format: :jpg) }, class: 'img-responsive is_lazy'

@@ -27,7 +27,7 @@
       - @skill.projects.each do |project|
         .well
           h4 style='margin-top: 0;'
-            =' project.title
+            =' link_to project.title, project
             - if can? :update, project
               ' (#{link_to 'Edit', edit_project_path(project)})
             - if can? :destroy, project

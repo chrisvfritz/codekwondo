@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Authorization
+
   has_many :project_completions
 
   acts_as_voter
@@ -15,21 +17,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def admin?
-    [
-      'chrisvfritz'
-    ].include? username
-  end
-
-  def instructor?
-    false
-  end
-
-  def mentor?
-    false
-  end
-
-  def mastered_skills
-    project_completions.includes(:project).select{|p| p.completed?}.map{|p| p.project.skill}.uniq
+  def completed_courses
+    completed_skill_ids = Project.where( id: project_completions.select(:project_id) ).pluck(:skill_id)
+    Course.select{|course| course.skills.pluck(:id).all?{|skill_id| completed_skill_ids.include?(skill_id) }}
   end
 end

@@ -1,7 +1,7 @@
 class ProjectCompletionsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_completion, only: [:show, :edit, :update, :destroy]
+  before_action :set_completion, only: [:show, :edit, :update, :destroy, :screenshot]
   before_action :set_project, only: [:new, :create]
 
   def show
@@ -40,6 +40,22 @@ class ProjectCompletionsController < ApplicationController
     @completion.destroy
     respond_to do |format|
       format.html { redirect_to :back, notice: 'Showcase was successfully deleted.' }
+    end
+  end
+
+  def screenshot
+    default_capture_size = 1170
+    default_thumbnail_size = 200
+
+    kit = IMGKit.new(@completion.url,
+      width: params[:width] || default_capture_size,
+      height: params[:height] || default_capture_size,
+      quality: params[:quality] || ((default_thumbnail_size.to_f / default_capture_size) * 100).ceil,
+      'disable-smart-width' => true
+    ).to_img(params[:format].to_sym)
+
+    respond_to do |format|
+      format.jpg { send_data kit, type: 'image/jpeg', disposition: 'inline' }
     end
   end
 

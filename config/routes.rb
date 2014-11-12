@@ -30,7 +30,9 @@ Rails.application.routes.draw do
       end
 
       resources :projects, shallow: true, except: [:index] do
-        resources :project_completions, path: '/showcases', except: [:index]
+        resources :project_completions, path: '/showcases', except: [:index] do
+          member { get :screenshot }
+        end
       end
     end
   end

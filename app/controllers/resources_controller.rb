@@ -68,6 +68,6 @@ private
   end
 
   def resource_params
-    params.require(:resource).permit(:title, :url, :paid, :price)
+    params.require(:resource).permit(:title, :url, :paid, :price, :skill_id)
   end
 end

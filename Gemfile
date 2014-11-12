@@ -16,6 +16,7 @@ gem 'acts_as_votable', '~> 0.10.0'
 
 # MISC
 gem 'rest-client', '~> 1.7.2'
+gem 'imgkit', '~> 1.5.0'
 
 # TEMPLATING
 gem 'slim-rails', require: 'slim/logic_less'                           # Use slim for HTML templates (with logic-less mode for presentations)

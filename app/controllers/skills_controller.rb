@@ -1,21 +1,22 @@
 class SkillsController < ApplicationController
   load_and_authorize_resource except: [:presentation]
 
-  before_action :set_skill,  only: [:show, :edit, :update, :destroy, :presentation]
+  before_action :set_skill,  only: [:edit, :update, :destroy, :presentation]
   before_action :set_course, only: [:new, :create, :sort]
 
   def show
+    @skill = Skill.includes(projects: :criteria).find(params[:id])
   end
 
   def new
-    @skill = Course.find(params[:course_id]).skills.build
+    @skill = @course.skills.build
   end
 
   def edit
   end
 
   def create
-    @skill = Course.find(params[:course_id]).skills.build(skill_params)
+    @skill = @course.skills.build(skill_params)
 
     respond_to do |format|
       if @skill.save
@@ -58,7 +59,7 @@ class SkillsController < ApplicationController
 private
 
   def set_skill
-    @skill  = Skill.find(params[:id])
+    @skill = Skill.find(params[:id])
   end
 
   def set_course

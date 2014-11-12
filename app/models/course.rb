@@ -2,7 +2,7 @@ class Course < ActiveRecord::Base
   include DagMethods
   include PaperTrail
 
-  has_many :skills, -> { order("position ASC") }
+  has_many :skills
 
   has_many :course_relationships, dependent: :destroy
   has_many :prereqs, through: :course_relationships

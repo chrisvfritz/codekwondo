@@ -1,0 +1,25 @@
+= render 'projects/overview', project: @completion.project
+
+hr
+
+- status = @completion.completed? ? 'Completed' : 'In Progress'
+
+h2= link_to "#{status} by #{@completion.user.name}", @completion.url
+
+h3 Desktop Large
+= image_tag 'loading.gif', data: { original: screenshot_project_completion_path(@completion, format: :jpg, quality: 94, width: 1920, height: 1080) }, class: 'img-responsive is_lazy center-block'
+
+h3 Desktop Small
+= image_tag 'loading.gif', data: { original: screenshot_project_completion_path(@completion, format: :jpg, quality: 94, width: 1280, height: 720) }, class: 'img-responsive is_lazy center-block'
+
+h3 Tablet Large
+= image_tag 'loading.gif', data: { original: screenshot_project_completion_path(@completion, format: :jpg, quality: 94, width: 1024, height: 1280) }, class: 'img-responsive is_lazy center-block'
+
+h3 Tablet Small
+= image_tag 'loading.gif', data: { original: screenshot_project_completion_path(@completion, format: :jpg, quality: 94, width: 720, height: 1024) }, class: 'img-responsive is_lazy center-block'
+
+h3 Phone Large
+= image_tag 'loading.gif', data: { original: screenshot_project_completion_path(@completion, format: :jpg, quality: 94, width: 414, height: 736) }, class: 'img-responsive is_lazy center-block'
+
+h3 Phone Small
+= image_tag 'loading.gif', data: { original: screenshot_project_completion_path(@completion, format: :jpg, quality: 94, width: 320, height: 420) }, class: 'img-responsive is_lazy center-block'

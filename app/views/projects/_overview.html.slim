@@ -1,0 +1,10 @@
+h2= project.title
+
+.well.row
+  .col-sm-6
+    p= project.description
+  .col-sm-6
+    p The final result must:
+    ul
+      - project.criteria.each do |criterion|
+        li= criterion.description

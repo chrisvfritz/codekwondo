@@ -3,6 +3,9 @@
 
   .form-inputs
     = f.input :url
+
+    p Check off project criteria as you meet them. When they're all checked, your implementation of this project will appear on your public portfolio.
+
     = f.simple_fields_for :criteria_completion do |c|
       - f.object.project.criteria.each do |criterion|
         - criterion_id = criterion.id.to_s

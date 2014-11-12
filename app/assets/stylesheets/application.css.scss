@@ -4,12 +4,16 @@
  *= require_self
  */
 
-@import 'vendor/bootstrap/variables';
+@import 'bootstrap/variables';
 
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 
 @import 'lib/variables';
+
+@import 'bootstrap/extensions/block_tight';
+@import 'bootstrap/extensions/non_divisor_columns';
+@import 'bootstrap/extensions/responsive_grid';
 
 @import 'vendor/controls/selectize';
 

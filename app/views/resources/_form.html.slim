@@ -5,7 +5,7 @@
     = f.input :title, input_html: { value: f.object.title || params[:title] }
     = f.input :url,   input_html: { value: f.object.url   || params[:url]   }, label: 'URL'
     - unless @resource.skill
-      = f.input :skill, collection: Skill.where(course_id: params[:course_id]).order('title ASC').pluck(:title, :id)
+      = f.association :skill, collection: Skill.where(course_id: params[:course_id]).order('title ASC').pluck(:title, :id)
 
   .form-actions
     = f.button :submit

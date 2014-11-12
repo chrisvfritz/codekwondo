@@ -1,0 +1,5 @@
+.responsive-grid {
+  margin-bottom: -$grid-gutter-width;
+
+  .grid-item { margin-bottom: $grid-gutter-width; }
+}
