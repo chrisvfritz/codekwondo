@@ -1,4 +1,4 @@
-module Skill::Validations
+module ::Concerns::Skill::Validations
   extend ActiveSupport::Concern
 
   included do

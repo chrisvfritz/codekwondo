@@ -1,5 +1,6 @@
 class Course < ActiveRecord::Base
-  include DagMethods
+  include ::Concerns::Course::DagMethods
+  include ::Concerns::Course::Validations
   include PaperTrail
 
   has_many :skills

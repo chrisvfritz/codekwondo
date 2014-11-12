@@ -1,4 +1,4 @@
-module User::Authorization
+module ::Concerns::User::Authorization
   extend ActiveSupport::Concern
 
   # -----------

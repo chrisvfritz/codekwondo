@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  include User::Authorization
+  include ::Concerns::User::Authorization
 
   has_many :project_completions
 

@@ -1,4 +1,4 @@
-module Resource::RatingSystem
+module ::Concerns::Resource::RatingSystem
   extend ActiveSupport::Concern
 
   included do

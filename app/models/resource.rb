@@ -1,8 +1,8 @@
 class Resource < ActiveRecord::Base
   belongs_to :skill
 
-  include Resource::Validations
+  include ::Concerns::Resource::Validations
   include UrlValidations
-  include Resource::RatingSystem
+  include ::Concerns::Resource::RatingSystem
   include PaperTrail
 end

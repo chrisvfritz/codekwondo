@@ -1,4 +1,4 @@
-module Skill::DagMethods
+module ::Concerns::Skill::DagMethods
   extend ActiveSupport::Concern
 
   def dag_label

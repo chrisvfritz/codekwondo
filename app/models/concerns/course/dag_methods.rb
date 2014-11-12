@@ -1,4 +1,4 @@
-module Course::DagMethods
+module ::Concerns::Course::DagMethods
   extend ActiveSupport::Concern
 
   def dag_label

@@ -1,4 +1,4 @@
-module Resource::Validations
+module ::Concerns::Resource::Validations
   extend ActiveSupport::Concern
 
   included do

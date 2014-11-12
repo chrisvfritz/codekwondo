@@ -1,4 +1,4 @@
-module Course::Validations
+module ::Concerns::Course::Validations
   extend ActiveSupport::Concern
 
   included do
