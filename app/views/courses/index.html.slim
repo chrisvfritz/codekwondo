@@ -2,7 +2,11 @@ h2.text-center Web Development Deconstructed
 
 - breadcrumb :courses
 
-h3 Courses
+h3
+  ' Courses
+  - if can? :create, Course
+    = link_to new_course_path do
+      .glyphicon.glyphicon-plus-sign
 
 table.table.table-striped
   tbody data-update-url=sort_courses_path class="#{'sortable' if can?(:sort, Course)}"

@@ -4,11 +4,11 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   def index
-    @courses = Course.order('position ASC')
+    @courses = Course.includes(:creator, :skills).order(:position)
   end
 
   def show
-    @skills = @course.skills.includes(:primary_language).order('position ASC')
+    @skills = @course.skills.includes(:creator, :primary_language).order('position ASC')
   end
 
   def new
@@ -19,7 +19,7 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new course_params
+    @course = Course.new course_params.merge(creator_id: current_user.id)
 
     respond_to do |format|
       if @course.save

@@ -3,6 +3,8 @@ class Course < ActiveRecord::Base
   include ::Concerns::Course::Validations
   include PaperTrail
 
+  belongs_to :creator, class_name: 'User'
+
   has_many :skills
 
   has_many :course_relationships, dependent: :destroy

@@ -1,11 +1,11 @@
 class ResourcesController < ApplicationController
-  protect_from_forgery except: :bookmarklet
   load_and_authorize_resource
 
   before_action :set_resource, only: [:edit, :update, :destroy, :upvote, :downvote]
   before_action :set_skill,    only: [:new, :create]
 
   def new
+    @course_id = session[:resources_bookmarklet_course_id] = params[:course_id] if params[:course_id]
     @resource = @skill.present? ? @skill.resources.build : Resource.new
   end
 
@@ -13,12 +13,14 @@ class ResourcesController < ApplicationController
   end
 
   def create
+    @course_id = session[:resources_bookmarklet_course_id]
     is_from_bookmarklet = params[:resource][:skill].present?
     params[:skill_id] ||= params[:resource][:skill]
-    @resource = @skill.present? ? @skill.resources.build(resource_params) : Resource.new(resource_params)
+    @resource = @skill.present? ? @skill.resources.build(resource_params.merge(creator_id: current_user.id)) : Resource.new(resource_params.merge(creator_id: current_user.id))
 
     respond_to do |format|
       if @resource.save
+        session.delete(:resources_bookmarklet_course_id)
         current_user.likes @resource
         format.html { redirect_to (is_from_bookmarklet ? @resource.url : @resource.skill), notice: 'Resource was successfully created.' }
       else
@@ -52,9 +54,6 @@ class ResourcesController < ApplicationController
   def downvote
     current_user.dislikes @resource
     redirect_to @resource.skill
-  end
-
-  def bookmarklet
   end
 
 private

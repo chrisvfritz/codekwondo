@@ -5,6 +5,7 @@ class Skill < ActiveRecord::Base
 
   belongs_to :course
   belongs_to :primary_language, class_name: 'Language'
+  belongs_to :creator, class_name: 'User'
 
   has_many :skill_relationships, dependent: :destroy
   has_many :prereqs, through: :skill_relationships

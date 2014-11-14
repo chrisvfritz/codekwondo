@@ -6,7 +6,7 @@
     = f.input :abbrev, label: 'Abbreviation'
     - other_courses = Course.where.not(id: f.object.id)
     - if other_courses.any?
-      = f.association :prereqs, collection: other_courses
+      = f.association :prereqs, collection: other_courses, label: 'Prerequisites'
 
   .form-actions
     = f.button :submit

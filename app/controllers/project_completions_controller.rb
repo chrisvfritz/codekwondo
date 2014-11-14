@@ -44,6 +44,8 @@ class ProjectCompletionsController < ApplicationController
   end
 
   def screenshot
+    authorize! :read, ProjectCompletion
+
     default_capture_size = 1170
     default_thumbnail_size = 200
 

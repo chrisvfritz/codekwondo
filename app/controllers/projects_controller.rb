@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = @skill.projects.build project_params
+    @project = @skill.projects.build project_params.merge(creator_id: current_user.id)
 
     respond_to do |format|
       if @project.save

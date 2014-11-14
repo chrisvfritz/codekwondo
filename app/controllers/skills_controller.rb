@@ -5,7 +5,7 @@ class SkillsController < ApplicationController
   before_action :set_course, only: [:new, :create, :sort]
 
   def show
-    @skill = Skill.includes(projects: :criteria).find(params[:id])
+    @skill = Skill.includes(projects: [:creator, :criteria, :completions], resources: :creator).find(params[:id])
   end
 
   def new
@@ -16,7 +16,7 @@ class SkillsController < ApplicationController
   end
 
   def create
-    @skill = @course.skills.build(skill_params)
+    @skill = @course.skills.build skill_params.merge(creator_id: current_user.id)
 
     respond_to do |format|
       if @skill.save

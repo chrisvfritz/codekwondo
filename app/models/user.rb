@@ -1,6 +1,11 @@
 class User < ActiveRecord::Base
   include ::Concerns::User::Authorization
 
+  has_many :created_courses,   class_name: 'Course',   foreign_key: 'creator_id'
+  has_many :created_skills,    class_name: 'Skill',    foreign_key: 'creator_id'
+  has_many :created_resources, class_name: 'Resource', foreign_key: 'creator_id'
+  has_many :created_projects,  class_name: 'Project',  foreign_key: 'creator_id'
+
   has_many :project_completions
 
   acts_as_voter
