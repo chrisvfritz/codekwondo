@@ -65,11 +65,16 @@ end
 group :development, :test do
   gem 'spring-commands-rspec'
   gem 'rspec-rails', '~> 3.0.0' # Use rspec for testing
-  gem 'capybara'                # Use capybara to
   gem 'factory_girl_rails'
-  gem 'database_cleaner'
   gem 'guard-rspec'        # Watches our app for changes, to automatically and selectively run tests
   # gem 'rb-fsevent' if `uname` =~ /Darwin/
+end
+
+group :test do
+  gem 'capybara', '~> 2.4.4'
+  gem 'database_cleaner', '~> 1.3.0'
+  gem 'launchy', '~> 2.4.3'
+  gem 'selenium-webdriver', '~> 2.44.0'
 end
 
 group :production do

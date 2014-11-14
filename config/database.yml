@@ -81,5 +81,4 @@ test:
 production:
   <<: *default
   database: tc359_production
-  username: tc359
   password: <%= ENV['TC359_DATABASE_PASSWORD'] %>
