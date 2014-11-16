@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 
   has_many :project_completions
 
+  validates_presence_of :provider, :uid, :username, :name, :email, :image_url, :github_url
+
   acts_as_voter
 
   def self.from_omniauth(auth)

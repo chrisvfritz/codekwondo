@@ -1,13 +1,19 @@
 describe User do
 
-  before(:each) { @user = FactoryGirl.create(:user) }
+  it { should validate_presence_of :provider   }
+  it { should validate_presence_of :uid        }
+  it { should validate_presence_of :username   }
+  it { should validate_presence_of :name       }
+  it { should validate_presence_of :email      }
+  it { should validate_presence_of :image_url  }
+  it { should validate_presence_of :github_url }
 
-  subject { @user }
+  context 'when creating a new user with valid data' do
+    before(:each) { @user = FactoryGirl.create(:user) }
 
-  it { should respond_to(:name) }
+    subject { @user }
 
-  it "#name returns a string" do
-    expect(@user.name).to match 'Mock User'
+    it { should be_valid }
   end
 
 end

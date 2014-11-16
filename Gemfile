@@ -61,7 +61,7 @@ group :development do
   # gem 'rack-mini-profiler' # Gives a performance breakdown in development
 end
 
-# TESTING - For example setup, see http://www.webascender.com/Blog/ID/566/Testing-Rails-4-Apps-With-RSpec-3-Part-I#.VEUZxZPF-0w
+# TESTING
 group :development, :test do
   gem 'spring-commands-rspec'
   gem 'rspec-rails', '~> 3.0.0' # Use rspec for testing
@@ -72,13 +72,14 @@ end
 
 group :test do
   gem 'capybara', '~> 2.4.4'
+  gem 'shoulda-matchers', '~> 2.7.0', require: false
   gem 'database_cleaner', '~> 1.3.0'
   gem 'launchy', '~> 2.4.3'
   gem 'selenium-webdriver', '~> 2.44.0'
 end
 
 group :production do
-  gem 'rails_12factor'    # Makes assets and logs functional on Heroku
+  gem 'rails_12factor' # Makes assets and logs functional on Heroku
 end
 
 # NOTES

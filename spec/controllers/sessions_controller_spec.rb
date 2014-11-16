@@ -1,10 +1,6 @@
-require 'rails_helper'
-
 describe SessionsController do
 
-  before do
-    @controller.request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:github]
-  end
+  before { @controller.request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:github] }
 
   describe '#create' do
 
@@ -27,9 +23,7 @@ describe SessionsController do
 
   describe '#destroy' do
 
-    before do
-      post :create, provider: :github
-    end
+    before { post :create, provider: :github }
 
     it 'resets the session' do
       expect(session[:user_id]).not_to be_nil
