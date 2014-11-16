@@ -19,7 +19,10 @@
 //= require codemirror/modes/xml
 //= require codemirror/modes/htmlmixed
 //= require codemirror/modes/ruby
-//= require codemirror/modes/slim
+//= require codemirror/modes/javascript
+//= require codemirror/modes/coffeescript
+//= require codemirror/modes/css
+//= require codemirror/modes/markdown
 //= require cocoon
 //= require_tree ./vendor
 //= require_tree ./lib

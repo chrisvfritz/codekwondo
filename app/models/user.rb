@@ -26,6 +26,18 @@ class User < ActiveRecord::Base
 
   def completed_courses
     completed_skill_ids = Project.where( id: project_completions.select(:project_id) ).pluck(:skill_id)
-    Course.select{|course| course.skills.pluck(:id).all?{|skill_id| completed_skill_ids.include?(skill_id) }}
+    Course.select do |course|
+      course.skills.pluck(:id).all? do |skill_id|
+        completed_skill_ids.include? skill_id
+      end
+    end
+  end
+
+  def mastered_skills
+    project_completions.includes(:project).select do |project|
+      project.completed?
+    end.map do |completion|
+      completion.project.skill
+    end.uniq
   end
 end

@@ -1,22 +1,11 @@
-h2.text-center Web Development Deconstructed
-
 - breadcrumb :courses
 
 h3
-  ' Courses
+  ' All Courses
   - if can? :create, Course
     = link_to new_course_path do
       .glyphicon.glyphicon-plus-sign
 
-table.table.table-striped
-  tbody data-update-url=sort_courses_path class="#{'sortable' if can?(:sort, Course)}"
-    - @courses.each do |course|
-      = content_tag_for :tr, course do
-        td= course.position
-        td style='width:100%' = link_to course.title, course
-        - if can? :update, course
-          td= link_to 'Edit', edit_course_path(course)
-        - if can? :destroy, course
-          td= link_to 'Delete', course, data: {confirm: "Are you sure you want to permanently delete the \"#{course.title}\" course?"}, method: :delete, class: 'text-danger'
+== render 'table', courses: @courses
 
 == render 'shared/dag', model_name: :course

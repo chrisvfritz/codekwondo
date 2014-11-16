@@ -29,10 +29,6 @@ module ::Concerns::User::Authorization
     MENTOR_LIST.include? username
   end
 
-  def mastered_skills
-    project_completions.includes(:project).select{|p| p.completed?}.map{|p| p.project.skill}.uniq
-  end
-
   # -------
   # QUERIES
   # -------

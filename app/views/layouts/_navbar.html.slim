@@ -9,7 +9,7 @@ nav.navbar.navbar-inverse
       = link_to 'Codekwondo', root_path, class: 'navbar-brand'
     #navbar_links.collapse.navbar-collapse
       ul.nav.navbar-nav
-        li= link_to 'Courses', courses_path
+        li= link_to 'My Courses', courses_path
       ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           li= link_to user_profile_path do

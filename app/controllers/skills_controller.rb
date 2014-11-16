@@ -53,7 +53,7 @@ class SkillsController < ApplicationController
 
   def presentation
     authorize! :read, @skill
-    render inline: ERB.new(Slim::ERBConverter.new(logic_less: true).call(@skill.presentation.to_s)).result, layout: 'presentation'
+    render inline: @skill.presentation, layout: 'presentation'
   end
 
 private

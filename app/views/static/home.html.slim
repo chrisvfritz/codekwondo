@@ -1,0 +1,4 @@
+- breadcrumb :courses
+
+- @instructors.each do |instructor|
+  == render 'courses/table', courses: instructor.created_courses
