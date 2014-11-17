@@ -4,6 +4,7 @@
   .form-inputs
     = f.input :title
     = f.association :primary_language, collection: Language.all
+    = f.input :tag_list, label: 'Stack Overflow tags'
     - other_skills = @skill.course.skills.where.not(id: f.object.id)
     - if other_skills.any?
       = f.association :prereqs, collection: other_skills, label: 'Prerequisites'
@@ -24,5 +25,28 @@ javascript:
         var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
         cm.replaceSelection(spaces);
       }
+    }
+  });
+
+  $('#skill_tag_list').selectize({
+    delimiter: ',',
+    persist: false,
+    load: function(query, callback) {
+      if (!query.length) return callback();
+      $.ajax({
+        url: '/stackoverflow/tags.json',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+          query: query,
+        },
+        error: function() {
+          callback();
+        },
+        success: function(response) {
+          console.log(response)
+          callback(response);
+        }
+      });
     }
   });

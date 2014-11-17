@@ -6,9 +6,11 @@ Rails.application.routes.draw do
   # AUTHENTICATION
   # --------------
 
-  match  '/auth/github/callback' => 'sessions#create', via: [:get, :post]
-  delete '/signout'              => 'sessions#destroy', as: :signout
-  get    '/auth/failure'         => 'sessions#failure'
+  match  '/auth/github/callback'        => 'sessions#create', via: [:get, :post]
+  delete '/signout'                     => 'sessions#destroy', as: :signout
+  get    '/auth/failure'                => 'sessions#failure'
+
+  match  '/auth/stackexchange/callback' => 'users#connect_stackoverflow', via: [:get, :post]
 
   resources :resources, only: [:new, :create] do
     collection { get :bookmarklet }
@@ -38,6 +40,8 @@ Rails.application.routes.draw do
   end
 
   get 'users/profile', as: :user_profile
+
+  get 'stackoverflow/tags', as: :stackoverflow_tags
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

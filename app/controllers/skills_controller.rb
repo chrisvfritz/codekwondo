@@ -67,6 +67,6 @@ private
   end
 
   def skill_params
-    params.require(:skill).permit(:title, :presentation, :primary_language_id, prereq_ids: [])
+    params.require(:skill).permit(:title, :presentation, :primary_language_id, :tag_list, prereq_ids: [])
   end
 end

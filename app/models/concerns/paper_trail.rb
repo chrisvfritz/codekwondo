@@ -1,4 +1,4 @@
-module PaperTrail
+module ::Concerns::PaperTrail
   extend ActiveSupport::Concern
 
   included do

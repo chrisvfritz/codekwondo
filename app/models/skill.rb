@@ -1,6 +1,6 @@
 class Skill < ActiveRecord::Base
   include ::Concerns::Skill::DagMethods
-  include PaperTrail
+  include ::Concerns::PaperTrail
   include ::Concerns::Skill::Validations
 
   belongs_to :course
@@ -17,12 +17,14 @@ class Skill < ActiveRecord::Base
   has_many :projects
   has_one  :teaching_material
 
+  acts_as_taggable
+
   acts_as_list scope: :course
 
-  def stack_overflow_questions
-    escaped_title = URI.encode_www_form_component(title)
-    response = RestClient.get("https://stackoverflow.com/search/titles?title=#{escaped_title}")
-    json_response = ActiveSupport::JSON.decode(response)
-    json_response['content'].gsub('href="/', 'href="https://stackoverflow.com/')
+  def related_stackoverflow_questions
+    Rails.cache.fetch("related_stackoverflow_questions: {skill_id: #{self.id}, tags: #{self.tag_list}, version: 2}", expires_in: 1.day) do
+      RubyStackoverflow.similar(title, { tagged: self.tag_list.join(';'), pagesize: 10 }).data
+    end
   end
+
 end

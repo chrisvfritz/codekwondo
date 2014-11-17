@@ -13,10 +13,12 @@ gem 'unicorn'        # Use unicorn as the app server
 gem 'acts_as_list'
 gem 'paper_trail', '~> 3.0.6'
 gem 'acts_as_votable', '~> 0.10.0'
+gem 'acts-as-taggable-on', '~> 3.4'
 
 # MISC
 gem 'rest-client', '~> 1.7.2'
 gem 'imgkit', '~> 1.5.0'
+gem 'ruby-stackoverflow', git: 'https://github.com/chrisvfritz/ruby-stackoverflow.git' # '~> 0.0.2'
 
 # TEMPLATING
 gem 'slim-rails', require: 'slim/logic_less'                           # Use slim for HTML templates (with logic-less mode for presentations)
@@ -41,6 +43,7 @@ gem 'codemirror-rails', '~> 4.4' # Include the CodeMirror JavaScript library
 # AUTHENTICATION
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'omniauth-stackexchange', '~> 0.2.0'
 
 # AUTHORIZATION
 gem 'cancancan', '~> 1.9'

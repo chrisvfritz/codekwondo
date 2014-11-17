@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
   include ::Concerns::User::Authorization
+  include ::Concerns::User::Stackoverflow
+
+  serialize :github_omniauth_hash,        Hash
+  serialize :stackoverflow_omniauth_hash, Hash
 
   has_many :created_courses,   class_name: 'Course',   foreign_key: 'creator_id'
   has_many :created_skills,    class_name: 'Skill',    foreign_key: 'creator_id'
@@ -14,6 +18,8 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     where( provider: auth.provider, uid: auth.uid ).first_or_create do |user|
+      user.github_omniauth_hash = auth
+
       user.provider   = auth.provider
       user.uid        = auth.uid
       user.username   = auth.info.nickname
@@ -40,4 +46,5 @@ class User < ActiveRecord::Base
       completion.project.skill
     end.uniq
   end
+
 end
