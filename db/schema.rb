@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20141117225705) do
     t.datetime "updated_at"
   end
 
-  add_index "skill_relationships", ["prereq_id", "skill_id"], name: "by_prereq_direction", unique: true, using: :btree
+  add_index "skill_relationships", ["prereq_id", "skill_id"], name: "by_skill_prereq_direction", unique: true, using: :btree
 
   create_table "skills", force: true do |t|
     t.string   "title"
