@@ -3,13 +3,15 @@
   table.table.table-striped
     tbody data-update-url=sort_course_skills_path(skills.first.course) class="#{'sortable' if can?(:sort_skills_for, skills.first.course)}"
       - skills.each do |skill|
-        = content_tag_for :tr, skill do
+        = content_tag_for :tr, skill, class: "#{'completed' if @completed_skills.include? skill}" do
           td= skill.position
-          td style='width:100%' = link_to skill.title, skill
-          - if can? :update, skill
-            td= link_to 'Edit', edit_skill_path(skill)
-          - if can? :destroy, skill
-            td= link_to 'Delete', skill, data: {confirm: "Are you sure you want to permanently delete the \"#{skill.title}\" skill?"}, method: :delete, class: 'text-danger'
+          td.full= link_to skill.title, skill
+          td
+            - if can? :update, skill
+              = link_to 'Edit', edit_skill_path(skill)
+          td
+            - if can? :destroy, skill
+              = link_to 'Delete', skill, data: {confirm: "Are you sure you want to permanently delete the \"#{skill.title}\" skill?"}, method: :delete, class: 'text-danger'
 
 - else
 

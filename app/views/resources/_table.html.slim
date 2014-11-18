@@ -7,20 +7,21 @@
     tbody
       - resources.sort_by{|resource| [resource.rating, resource.created_at]}.reverse.each do |resource|
         tr
-          td style='min-width: 75px'
+          td.votes
             =' resource.get_upvotes.count
             - if !can?(:vote_on, resource) || current_user.liked?(resource)
               span.glyphicon.glyphicon-thumbs-up'
             - else
-              =' link_to like_resource_path(resource), method: :put do
+              = link_to like_resource_path(resource), method: :put do
                 span.glyphicon.glyphicon-thumbs-up
+          td.votes
             =' resource.get_downvotes.count
             - if !can?(:vote_on, resource) || current_user.disliked?(resource)
               span.glyphicon.glyphicon-thumbs-down
             - else
               = link_to dislike_resource_path(resource), method: :put do
                 span.glyphicon.glyphicon-thumbs-down
-          td style='width: 100%'
+          td.full
             =' link_to resource.title, resource.url
           - if can_edit_any
             td

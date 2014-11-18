@@ -17,3 +17,16 @@
 }
 
 iframe { border: none; }
+
+td.votes {
+  white-space: nowrap;
+  text-align: right;
+}
+
+td.full {
+  width: 100%;
+}
+
+.table-striped > tbody > tr.completed {
+  background: lighten($brand-success, 35%);
+}

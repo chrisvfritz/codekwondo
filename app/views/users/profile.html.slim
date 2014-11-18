@@ -1,18 +1,31 @@
 h1 Portfolio: #{@user.name}
 
+
 h2 Badges
 
-.alert.alert-warning This is currently just lists courses completed, but eventually it could maybe list badges or something else more graphically pleasing.
+.alert.alert-warning This currently just lists courses completed, but eventually it could maybe list badges or something else more visually pleasing.
 
-ul
-  - @user.completed_courses.each do |course|
-    li= course.title
+- if (courses = @user.completed_courses).any?
+
+  ul
+    - courses.each do |course|
+      li= course.title
+
+- else
+
+  p You haven't completed any courses yet.
 
 
 h2 Skills mastered
 
-= responsive_grid @completions, lg: 5, md: 4, sm: 3, xs: 2 do |completion|
+- if @completions.any?
 
-  = link_to project_completion_path(completion) do
-    h2.h4= completion.project.skill.title
-    = image_tag 'loading.gif', data: { original: screenshot_project_completion_path(completion, format: :jpg) }, class: 'img-responsive is_lazy'
+  = responsive_grid @completions, lg: 5, md: 4, sm: 3, xs: 2 do |completion|
+
+    = link_to project_completion_path(completion) do
+      = image_tag 'loading.gif', data: { original: screenshot_project_completion_path(completion, format: :jpg) }, class: 'img-responsive is_lazy'
+      h3.h4= completion.project.skill.title
+
+- else
+
+  p You haven't mastered any skills yet.

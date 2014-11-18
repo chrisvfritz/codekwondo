@@ -1,5 +1,5 @@
 class StaticController < ApplicationController
   def home
-    @instructors = User.instructors.includes(created_courses: :creator)
+    @courses = Course.featured
   end
 end

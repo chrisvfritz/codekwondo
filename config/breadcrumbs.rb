@@ -1,14 +1,15 @@
-crumb :root do
+crumb :courses do
   link 'Home', root_path
 end
 
-crumb :courses do
-  link 'Courses', courses_path
-  parent :root
-end
+# Removing this for now until other people want to create their own courses
+# crumb :courses do
+#   link 'Courses', courses_path
+#   parent :root
+# end
 
 crumb :course do |course|
-  link course.title, course
+  link "Course: #{course.title}", course
   parent :courses
 end
 

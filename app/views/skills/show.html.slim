@@ -26,7 +26,7 @@
     - if @skill.projects.any?
       - @skill.projects.each do |project|
         .well
-          h4 style='margin-top: 0;'
+          h4.block-tight-top
             =' link_to project.title, project
             - if can? :update, project
               ' (#{link_to 'Edit', edit_project_path(project)})
@@ -47,8 +47,16 @@
     - else
       p No projects have been created yet.
 
-
-h3 Related StackOverflow Questions
-ul
-  - @skill.related_stackoverflow_questions.each do |question|
-    li= link_to question.title, question.link
+    h3 Related Stack Overflow Questions
+    - if (questions = @skill.related_stackoverflow_questions).any?
+      table.table.table-striped
+        tbody
+          - questions.each do |question|
+            tr
+              td.votes
+                =' question.score
+                span.glyphicon.glyphicon-thumbs-up
+              td.full= link_to question.title.html_safe, question.link
+              td= '✔' if question.is_answered
+    - else
+      p No related questions were found.

@@ -54,7 +54,7 @@ private
     end
     # courses can be destroyed by their creator if no one has started a project for them
     can :destroy, Course do |course|
-      course.creator == user && ProjectCompletion.where(project_id: course.skills.includes(:projects).map{|skill| skill.projects.pluck(:id)}.flatten).none?
+      course.creator == user && ProjectCompletion.where(project_id: course.skills.map{|skill| skill.projects.pluck(:id)}.flatten).none?
     end
 
     # skills can be created by people who created the course

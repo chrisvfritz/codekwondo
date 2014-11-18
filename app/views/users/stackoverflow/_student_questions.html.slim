@@ -1,0 +1,5 @@
+table.table.table-striped
+  tbody
+    - questions.each do |question|
+      tr
+        td= link_to question.title, question.link

@@ -13,21 +13,21 @@ module ::Concerns::User::Stackoverflow
 
   module ClassMethods
 
-    def stackoverflow_questions(max_questions=30)
+    def stackoverflow_questions(options={})
       return [] if (so_ids = self.stackoverflow_ids).empty?
 
-      Rails.cache.fetch("stackoverflow_questions: #{so_ids}", expires_in: 10.minutes) do
+      Rails.cache.fetch("stackoverflow_questions: #{so_ids}, options: #{options}, version: 2", expires_in: 10.minutes) do
 
         # Get last 30 questions for each user connected to Stack Overflow, grouped by user
-        RubyStackoverflow.users_questions(so_ids).data.
+        RubyStackoverflow.users_questions(so_ids, ).data.
           # Map all the questions into a single array
           map(&:questions).flatten.
           # Weed out any questions that have an accepted answer
-          select{|q| !q.is_answered}.
+          select{|q| options[:unanswered] ? !q.is_answered : true }.
           # Sort results by creation date, descending
           sort_by(&:creation_date).reverse.
-          # Only list the most recent X questions
-          first(max_questions)
+          # Only list the most recent 15 questions
+          first(10)
 
       end
     end

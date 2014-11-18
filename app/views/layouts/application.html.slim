@@ -11,6 +11,6 @@ html
 
     .container
       == render 'layouts/flash_messages'
-      == breadcrumbs style: :bootstrap
+      == breadcrumbs style: :bootstrap, display_single_fragment: true
       / == render 'layouts/breadcrumbs'
       = yield

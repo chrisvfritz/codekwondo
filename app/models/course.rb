@@ -13,6 +13,8 @@ class Course < ActiveRecord::Base
   has_many :inverse_course_relationships, class_name: 'CourseRelationship', foreign_key: 'prereq_id', dependent: :destroy
   has_many :inverse_prereqs, through: :inverse_course_relationships, source: :course
 
+  scope :featured, -> { where(featured: true).order(:position) }
+
   acts_as_list
 
   def language_breakdown

@@ -18,15 +18,15 @@ module ::Concerns::User::Authorization
   # ------
 
   def admin?
-    ADMIN_LIST.include? username
+    ADMIN_LIST.include?(username)
   end
 
   def instructor?
-    INSTRUCTOR_LIST.include? username
+    INSTRUCTOR_LIST.include?(username) || self.admin?
   end
 
   def mentor?
-    MENTOR_LIST.include? username
+    MENTOR_LIST.include?(username) || self.instructor? || self.admin?
   end
 
   # -------

@@ -1,11 +1,20 @@
 - breadcrumb :courses
 
-- @instructors.each do |instructor|
-  == render 'courses/table', courses: instructor.created_courses
+h2.h3 Featured Courses
+== render 'courses/table', courses: @courses
 
-- stackoverflow_ids = User.where.not(stackoverflow_id: nil).order(created_at: :desc).limit(100).pluck(:stackoverflow_id)
-- questions = RubyStackoverflow.users_questions(stackoverflow_ids).data.map(&:questions).flatten.select{|q| !q.is_answered}.sort_by(&:creation_date).reverse
+.row
 
-ul
-  - questions.each do |question|
-    li= link_to question.title, question.link
+  .col-sm-6
+    h3 Student Questions (Unanswered)
+    - if (questions = User.students.stackoverflow_questions(unanswered: true)).any?
+      == render 'users/stackoverflow/student_questions', questions: questions
+    - else
+      p Yay! All students' questions on Stack Overflow have been answered.
+
+  .col-sm-6
+    h3 Student Questions (All)
+    - if (questions = User.students.stackoverflow_questions).any?
+      == render 'users/stackoverflow/student_questions', questions: questions
+    - else
+      p No students have asked questions yet on Stack Overflow.

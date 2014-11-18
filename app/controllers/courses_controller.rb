@@ -4,11 +4,14 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   def index
-    @courses = current_user.created_courses.includes(:creator, :skills).order(:position)
+    @courses = current_user.created_courses.includes(:creator, :skills).order(:title)
   end
 
   def show
     @skills = @course.skills.includes(:creator, :primary_language).order('position ASC')
+    if user_signed_in?
+      @completed_skills = @skills.includes(:projects).select{|skill| skill.projects.any?{|project| (completion = project.completions.find_by(user_id: current_user.id)) ? completion.completed? : false}}
+    end
   end
 
   def new

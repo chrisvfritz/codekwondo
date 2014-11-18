@@ -22,8 +22,8 @@ class Skill < ActiveRecord::Base
   acts_as_list scope: :course
 
   def related_stackoverflow_questions
-    Rails.cache.fetch("related_stackoverflow_questions: {skill_id: #{self.id}, tags: #{self.tag_list}, version: 2}", expires_in: 1.day) do
-      RubyStackoverflow.similar(title, { tagged: self.tag_list.join(';'), pagesize: 10 }).data
+    Rails.cache.fetch("related_stackoverflow_questions: {skill_id: #{self.id}, tags: #{self.tag_list}, version: 5}", expires_in: 1.day) do
+      RubyStackoverflow.similar(title, { tagged: self.tag_list.join(';'), pagesize: 10, sort: 'relevance', order: 'desc' }).data
     end
   end
 
