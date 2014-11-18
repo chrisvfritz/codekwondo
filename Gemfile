@@ -84,6 +84,3 @@ end
 group :production do
   gem 'rails_12factor' # Makes assets and logs functional on Heroku
 end
-
-# NOTES
-# - Turbolinks comes with Rails 4. You can remove it with http://blog.steveklabnik.com/posts/2013-06-25-removing-turbolinks-from-rails-4
