@@ -1,5 +1,6 @@
 class SkillsController < ApplicationController
-  load_and_authorize_resource except: [:presentation]
+  load_and_authorize_resource :course
+  load_and_authorize_resource :skill, through: :course, shallow: true, except: [:presentation]
 
   before_action :set_skill,  only: [:edit, :update, :destroy, :presentation]
   before_action :set_course, only: [:new, :create, :sort]

@@ -1,5 +1,6 @@
 class ResourcesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :skill
+  load_and_authorize_resource :resource, through: :skill, shallow: true
 
   before_action :set_resource, only: [:edit, :update, :destroy, :upvote, :downvote]
   before_action :set_skill,    only: [:new, :create]

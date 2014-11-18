@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :skill
+  load_and_authorize_resource :project, through: :skill, shallow: true
 
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :set_skill, only: [:new, :create]
