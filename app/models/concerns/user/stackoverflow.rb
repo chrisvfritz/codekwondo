@@ -16,7 +16,7 @@ module ::Concerns::User::Stackoverflow
     def stackoverflow_questions(options={})
       return [] if (so_ids = self.stackoverflow_ids).empty?
 
-      Rails.cache.fetch("stackoverflow_questions: #{so_ids}, options: #{options}, version: 2", expires_in: 10.minutes) do
+      Rails.cache.fetch("stackoverflow_questions: #{so_ids}, options: #{options}, version: 3", expires_in: 10.minutes) do
 
         # Get last 30 questions for each user connected to Stack Overflow, grouped by user
         RubyStackoverflow.users_questions(so_ids, ).data.
@@ -27,7 +27,11 @@ module ::Concerns::User::Stackoverflow
           # Sort results by creation date, descending
           sort_by(&:creation_date).reverse.
           # Only list the most recent 15 questions
-          first(10)
+          first(10).
+          # Convert questions to OpenStructs to preserve access to attributes after caching
+          map do |question|
+            OpenStruct.new(JSON.parse(question.to_json))
+          end
 
       end
     end
