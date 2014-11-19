@@ -20,10 +20,20 @@ html lang="en"
       .reveal section p, .reveal section ol, .reveal section ul, .reveal section ol li, .reveal section ul li {
         text-align: left;
       }
+      .reveal section p {
+        margin-bottom: 20px;
+      }
+      .reveal section ol, .reveal section ul {
+        display: block;
+        margin-bottom: 20px;
+      }
       .reveal section img { text-align: center; }
       .reveal section img.full, .reveal section video.full {
         width: 100%;
         max-height: 100%;
+      }
+      .reveal pre code {
+        word-wrap: inherit;
       }
 
     / If the query includes 'print-pdf', include the PDF print sheet
