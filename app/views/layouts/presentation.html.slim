@@ -60,7 +60,10 @@ html lang="en"
       .slides
         section data-markdown='' data-separator='^\n----\n$' data-vertical='^\n--\n$' data-notes='^Note:'
           script type='text/template'
-            == yield
+            - if can? :include_html_in, :markdown
+              == yield
+            - else
+              = escape_once yield
 
     script src='/revealjs/lib/js/head.min.js'
     script src='/revealjs/js/reveal.js'

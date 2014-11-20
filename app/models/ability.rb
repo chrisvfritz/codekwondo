@@ -37,6 +37,8 @@ private
     end
 
     can [:update, :sort], [Course, Skill]
+
+    can :include_html_in, :markdown
   end
 
   def mentor
