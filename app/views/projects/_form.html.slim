@@ -10,6 +10,7 @@
     = f.input :title
     = f.input :description
     h3 Criteria
+    p The final result must:
     #criteria
       = f.simple_fields_for :criteria do |c|
         = render 'criterion_fields', f: c
