@@ -8,7 +8,7 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @skills = @course.skills.includes(:creator, :primary_language).order('position ASC')
+    @skills = @course.skills.includes(:creator, :primary_language).order(:position)
     if user_signed_in?
       @completed_skills = @skills.includes(:projects).select{|skill| skill.projects.any?{|project| (completion = project.completions.find_by(user_id: current_user.id)) ? completion.completed? : false}}
     end
@@ -66,6 +66,6 @@ private
   end
 
   def course_params
-    params.require(:course).permit(:title, :abbrev, prereq_ids: [], skill_ids: [])
+    params.require(:course).permit(:title, :abbrev, prereq_ids: [])
   end
 end

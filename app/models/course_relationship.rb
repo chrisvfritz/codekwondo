@@ -2,6 +2,10 @@ class CourseRelationship < ActiveRecord::Base
   belongs_to :course
   belongs_to :prereq, class_name: 'Course'
 
+  validates_presence_of :course, :prereq
+
+  validates_uniqueness_of :course_id, scope: :prereq_id
+
   validate :is_acyclic
 
   def is_acyclic

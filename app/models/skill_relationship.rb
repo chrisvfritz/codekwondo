@@ -2,6 +2,10 @@ class SkillRelationship < ActiveRecord::Base
   belongs_to :skill
   belongs_to :prereq, class_name: 'Skill'
 
+  validates_presence_of :skill, :prereq
+
+  validates_uniqueness_of :skill_id, scope: :prereq_id
+
   validate :is_acyclic
 
   def is_acyclic

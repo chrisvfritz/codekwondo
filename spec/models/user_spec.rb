@@ -9,7 +9,7 @@ describe User do
   it { should validate_presence_of :github_url }
 
   context 'when creating a new user with valid data' do
-    before(:each) { @user = FactoryGirl.create(:user) }
+    before(:each) { @user = create(:user) }
 
     subject { @user }
 
