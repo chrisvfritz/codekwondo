@@ -26,7 +26,10 @@ private
   def admin
     instructor
 
-    # can :manage, :all
+    can :sort, Course do |*courses|
+      courses.count > 1 &&
+        courses.map(&:id).sort == Course.featured.ids.sort
+    end
   end
 
   def instructor
@@ -36,7 +39,7 @@ private
       resource.creator == user
     end
 
-    can [:update, :sort], [Course, Skill]
+    can :update, [Course, Skill]
 
     can :include_html_in, :markdown
   end

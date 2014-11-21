@@ -51,8 +51,10 @@ class CoursesController < ApplicationController
   end
 
   def sort
-    params[:course].each_with_index do |id, index|
-      Course.where(id: id).update_all(position: index+1)
+    @courses = Course.where(id: params[:course])
+    authorize! :sort, *@courses
+    @courses.each do |course|
+      course.update_attribute( :position, params[:course].index(course.id.to_s) + 1 )
     end
     render nothing: true
   end
