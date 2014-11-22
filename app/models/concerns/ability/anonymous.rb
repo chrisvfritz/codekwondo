@@ -1,11 +1,11 @@
 module ::Concerns::Ability::Anonymous
 
   def anonymous_course_abilities
-    can :read, Course
+    can :read, ::Course
   end
 
   def anonymous_skill_abilities
-    can :read, Skill
+    can :read, ::Skill
   end
 
   def anonymous_resource_abilities
@@ -13,13 +13,13 @@ module ::Concerns::Ability::Anonymous
   end
 
   def anonymous_project_abilities
-    can :read, Project
+    can :read, ::Project
   end
 
   def anonymous_project_completion_abilities
-    can :read, ProjectCompletion
+    can :read, ::ProjectCompletion
 
-    can :screenshot, ProjectCompletion
+    can :screenshot, ::ProjectCompletion
   end
 
 end

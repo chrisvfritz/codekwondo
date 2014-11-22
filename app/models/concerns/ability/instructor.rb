@@ -1,15 +1,15 @@
 module ::Concerns::Ability::Instructor
 
   def instructor_course_abilities
-    can :update, Course
+    can :update, ::Course
   end
 
   def instructor_skill_abilities
-    can :update, Skill
+    can :update, ::Skill
   end
 
   def instructor_resource_abilities
-    can [:update, :destroy], Resource do |resource|
+    can [:update, :destroy], ::Resource do |resource|
       resource.creator == user
     end
   end

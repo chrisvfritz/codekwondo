@@ -1,31 +1,11 @@
 class SkillRelationship < ActiveRecord::Base
+  PREREQ_MODEL = 'skill'
+  include PrereqValidations
+
   belongs_to :skill
   belongs_to :prereq, class_name: 'Skill'
 
   validates_presence_of :skill, :prereq
 
   validates_uniqueness_of :skill_id, scope: :prereq_id
-
-  validate :is_acyclic
-
-  def is_acyclic
-    if skill == prereq
-      errors.add(:base, "A skill can't be a prerequisite to itself")
-      return false
-    end
-
-    check_for_skill = Proc.new do |current_skill|
-      if skill == current_skill
-        errors.add(:base, "Catch 22 detected. \"#{skill.title}\" is already required before \"#{prereq.title}\".")
-        return false
-      end
-
-      current_skill.prereqs.each do |skill_to_check|
-        check_for_skill.call skill_to_check
-      end
-    end
-
-    check_for_skill.call prereq
-    return true
-  end
 end
