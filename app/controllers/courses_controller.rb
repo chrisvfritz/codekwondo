@@ -31,6 +31,10 @@ class CoursesController < ApplicationController
         format.html { render :new }
       end
     end
+
+  rescue ActiveRecord::RecordInvalid => e
+    flash[:error] = e.message
+    render :new
   end
 
   def update
@@ -41,6 +45,10 @@ class CoursesController < ApplicationController
         format.html { render :edit }
       end
     end
+
+  rescue ActiveRecord::RecordInvalid => e
+    flash[:error] = e.message
+    render :edit
   end
 
   def destroy
