@@ -79,6 +79,7 @@ group :test do
   gem 'database_cleaner', '~> 1.3.0'
   gem 'launchy', '~> 2.4.3'
   gem 'selenium-webdriver', '~> 2.44.0'
+  gem 'codeclimate-test-reporter', require: nil
 end
 
 group :production do
