@@ -12,7 +12,7 @@ env:
     - DB: postgresql
 
 before_script:
-  - psql -c "create database $DB_NAME;" -U $DB_USER
+  - psql -c 'create database codekwondo_test;' -U postgres
   - RAILS_ENV=test bundle exec rake db:migrate --trace
 
 deploy:
