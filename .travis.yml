@@ -30,4 +30,4 @@ deploy:
 bundler_args: --without development
 
 script:
-  - bundle exec rspec spec
+  - bundle exec rspec

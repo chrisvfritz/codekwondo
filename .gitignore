@@ -12,7 +12,6 @@ dump.rdb
 
 *.rbc
 capybara-*.html
-.rspec
 /log
 /tmp
 /db/*.sqlite3
