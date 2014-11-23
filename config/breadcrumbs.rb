@@ -9,7 +9,7 @@ end
 
 crumb :course do |course|
   link "Course: #{course.title}", course
-  parent :courses
+  parent :featured_courses
 end
 
 # crumb :course_skills do |course|
