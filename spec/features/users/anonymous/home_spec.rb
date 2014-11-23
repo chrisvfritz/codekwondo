@@ -26,6 +26,14 @@ feature 'Homepage' do
       end
     end
 
+    it 'shows featured courses in a dag', js: true do
+      within '#dag' do
+        @featured_courses.each do |course|
+          expect(page).to have_css("circle[data-original-title='#{course.title}']")
+        end
+      end
+    end
+
     it 'does NOT display non-featured courses' do
       within '#courses_table' do
         @non_featured_courses.each do |course|
