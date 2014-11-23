@@ -12,9 +12,15 @@ class User < ActiveRecord::Base
 
   has_many :project_completions
 
+  acts_as_voter
+
   validates_presence_of :provider, :uid, :username, :name, :email, :image_url, :github_url
 
-  acts_as_voter
+  validate :username_not_a_mock
+
+  def username_not_a_mock
+    errors.add(:username, 'is already taken as a mock username') if username =~ /^-!/
+  end
 
   def self.from_omniauth(auth)
     where( provider: auth.provider, uid: auth.uid ).first_or_create do |user|

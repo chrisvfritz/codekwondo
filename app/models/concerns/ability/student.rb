@@ -1,20 +1,5 @@
 module ::Concerns::Ability::Student
 
-  def student_course_abilities
-    # anyone can create a course
-    can :create, ::Course
-
-    # courses can be updated or sorted by their creators
-    can [:update, :sort_skills_for], ::Course do |course|
-      course.creator == user
-    end
-
-    # courses can be destroyed by their creator if no one has started a project for them
-    can :destroy, ::Course do |course|
-      course.creator == user && ProjectCompletion.where(project_id: course.skills.map{|skill| skill.projects.pluck(:id)}.flatten).none?
-    end
-  end
-
   def student_skill_abilities
     # skills can be created by people who created the course
     can :create, ::Skill do |skill|

@@ -6,12 +6,17 @@ module ::Concerns::User::Authorization
   # -----------
 
   ADMIN_LIST = [
+    '-!admin', # mock with invalid username for testing
     'chrisvfritz'
   ]
 
-  INSTRUCTOR_LIST = []
+  INSTRUCTOR_LIST = [
+    '-!instructor' # mock with invalid username for testing
+  ]
 
-  MENTOR_LIST = []
+  MENTOR_LIST = [
+    '-!mentor' # mock with invalid username for testing
+  ]
 
   # ------
   # CHECKS

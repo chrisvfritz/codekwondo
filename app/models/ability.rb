@@ -41,12 +41,13 @@ private
 
   def mentor_abilities
     student_abilities
+
+    mentor_course_abilities
   end
 
   def student_abilities
     anonymous_abilities
 
-    student_course_abilities
     student_skill_abilities
     student_resource_abilities
     student_project_abilities

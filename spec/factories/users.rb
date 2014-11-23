@@ -8,6 +8,10 @@ FactoryGirl.define do
     email 'mockuser@example.com'
     image_url 'http://example.com/path/to/my/image.jpg'
     github_url 'http://github.com/mockuser'
+
+    trait(:mentor)     { username '-!mentor'     }
+    trait(:instructor) { username '-!instructor' }
+    trait(:admin)      { username '-!admin'      }
   end
 
 end

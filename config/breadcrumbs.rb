@@ -1,12 +1,11 @@
-crumb :courses do
+crumb :featured_courses do
   link 'Home', root_path
 end
 
-# Removing this for now until other people want to create their own courses
-# crumb :courses do
-#   link 'Courses', courses_path
-#   parent :root
-# end
+crumb :creator_courses do
+  link 'My Courses', courses_path
+  parent :featured_courses
+end
 
 crumb :course do |course|
   link "Course: #{course.title}", course

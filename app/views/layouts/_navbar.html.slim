@@ -10,7 +10,7 @@ nav.navbar.navbar-inverse
     #navbar_links.collapse.navbar-collapse
       ul.nav.navbar-nav
         - if user_signed_in?
-          - if current_user.instructor?
+          - if can? :create, Course
             li= link_to 'My Courses', courses_path
       ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
