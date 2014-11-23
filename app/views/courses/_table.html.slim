@@ -1,6 +1,6 @@
 - if courses.any?
 
-  table.table.table-striped
+  table#courses_table.table.table-striped
     tbody data-update-url=sort_courses_path class="#{'sortable' if can?(:sort, *courses)}"
       - courses.each_with_index do |course, index|
         = content_tag_for :tr, course do
@@ -10,3 +10,7 @@
             td= link_to 'Edit', edit_course_path(course)
           - if can? :destroy, course
             td= link_to 'Delete', course, data: {confirm: "Are you sure you want to permanently delete the \"#{course.title}\" course?"}, method: :delete, class: 'text-danger'
+
+- else
+
+  p No courses found.

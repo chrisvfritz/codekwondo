@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  # ---------
+  # BOOTSTRAP
+  # ---------
+
   def bootstrap_class_for(flash_type)
     case flash_type.to_sym
       when :notice        then 'alert-info'

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'static#home'
+  root to: 'home#index'
 
   # --------------
   # AUTHENTICATION
