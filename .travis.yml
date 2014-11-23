@@ -12,7 +12,8 @@ env:
     - DB: postgresql
 
 before_script:
-  - psql -c 'create database codekwondo_test;' -U postgres
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
   - RAILS_ENV=test bundle exec rake db:migrate --trace
 
 deploy:
@@ -29,4 +30,4 @@ deploy:
 bundler_args: --without development
 
 script:
-  - bundle exec rspec
+  - bundle exec rspec spec
