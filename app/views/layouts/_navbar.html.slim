@@ -15,7 +15,7 @@ nav.navbar.navbar-inverse
       ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           - if current_user.stackoverflow_id.blank?
-            li= link_to 'Connect StackOverflow', '/auth/stackexchange'
+            li= link_to 'Connect Stack Overflow', '/auth/stackexchange'
           li= link_to user_profile_path do
             .glyphicon.glyphicon-user'
             = current_user.name
