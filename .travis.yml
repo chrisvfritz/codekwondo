@@ -1,0 +1,32 @@
+language: ruby
+rvm:
+  - 2.1.2
+
+addons:
+  code_climate:
+    repo_token:
+      secure: "bcVuNU/YGdm+E0Anw0xTeUdFb9qFay1ifpyGZRNBN3GT2TByAb9U/kLJUWCgJx4dm5melJZxZ7Mm2D3uTJJ17DpHBtB1r3AIgEQ6xqX7iAeIczytv1du+9U7O38dLYzLcBEu4m3WUPjWCDXCqi5fP0+t4Ry0ShZlcV+jhAgl2Zo="
+
+env:
+  matrix:
+    - DB: postgresql
+
+before_script:
+  - psql -c "create database $DB_NAME;" -U $DB_USER
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: "ZxPs+jSM9Y+yAFxY8WNs/C93QL7+0ygJJ3NJLJQ4L2GCnPiDkSHD4nazlSUeTnk3glVy98niNnusD0mYMP/r5WHWP4xmJzfoEKpA3YZvyld9SLaFJ+ibiXCepQrk9ByV83OULcYbZWUWs90tZD3GyvluNjDR4+uSFeanKYuHMFg="
+  app:
+    master: codekwondo-staging
+    production: codekwondo
+  on:
+    repo: chrisvfritz/codekwondo
+  run: "bundle exec rake db:migrate"
+
+bundler_args: --without development
+
+script:
+  - bundle exec rspec
