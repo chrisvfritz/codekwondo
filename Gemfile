@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 ruby '2.1.2'
 
 # ESSENTIALS
-gem 'rails', '4.1.5' # The version of rails we're running
+gem 'rails', '4.1.7' # The version of rails we're running
 gem 'pg'             # We're using the Postgresql (PG) database
 gem 'unicorn'        # Use unicorn as the app server
 
