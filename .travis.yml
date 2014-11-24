@@ -4,8 +4,8 @@ rvm:
 
 env:
   global:
-    - secure: jpjjwqMa9J2yVFkSplxQB9cRKh6JRN1gWash8p+qAkubjVayLUKbokVwqlqjkbIfDw+e8giAN+AcuBdb8CNibfDLWfV0NgJeZPxZ4/Gryq1iTpYJMGr53GqUGbtNQNSKb83kMJYPXSRLgGkTD82OdTmQh5CyMI2UN9+btJcyLvY=
-    - secure: scIz0DAivmyfkl7GHOmIQ+V5Qwrh0d9pxhklEJ+q4ha92oHO49fLXP1NHsKoctDlYNaxnhGIMBYXxO6U324H6hgRbGhSl/LkhtGA+6IkfUleefhvWAGODlGIv1mla5VSfvveldZyTthw8MC/wqyawyJi79G8YrqZPtL4eQfZZTI=
+    - secure: "jpjjwqMa9J2yVFkSplxQB9cRKh6JRN1gWash8p+qAkubjVayLUKbokVwqlqjkbIfDw+e8giAN+AcuBdb8CNibfDLWfV0NgJeZPxZ4/Gryq1iTpYJMGr53GqUGbtNQNSKb83kMJYPXSRLgGkTD82OdTmQh5CyMI2UN9+btJcyLvY="
+    - secure: "scIz0DAivmyfkl7GHOmIQ+V5Qwrh0d9pxhklEJ+q4ha92oHO49fLXP1NHsKoctDlYNaxnhGIMBYXxO6U324H6hgRbGhSl/LkhtGA+6IkfUleefhvWAGODlGIv1mla5VSfvveldZyTthw8MC/wqyawyJi79G8YrqZPtL4eQfZZTI="
   matrix:
     - DB: postgresql
 
@@ -14,6 +14,12 @@ addons:
     repo_token:
       secure: "bcVuNU/YGdm+E0Anw0xTeUdFb9qFay1ifpyGZRNBN3GT2TByAb9U/kLJUWCgJx4dm5melJZxZ7Mm2D3uTJJ17DpHBtB1r3AIgEQ6xqX7iAeIczytv1du+9U7O38dLYzLcBEu4m3WUPjWCDXCqi5fP0+t4Ry0ShZlcV+jhAgl2Zo="
   sauce_connect: true
+
+before_install:
+  # - sudo apt-get update -qq
+  - sudo apt-get install -y ed
+  - cat travis/Gemfile.travis >> Gemfile
+  - ed -s spec/rails_helper.rb <<< '12r travis/rails_helper.rb.travis'$'\nw'
 
 before_script:
   - cp config/database.yml.travis config/database.yml
