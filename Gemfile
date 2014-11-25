@@ -28,7 +28,7 @@ gem 'cocoon', '~> 1.2.6'                                               # Simplif
 gem 'gretel', '~> 3.0.8'                                               # Simplifies breadcrumbing
 
 # ASSET PREPARATION
-gem 'sass-rails', '~> 4.0.4'   # Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.5'   # Use SCSS for stylesheets
 gem 'coffee-rails', '~> 4.1.0' # Use CoffeeScript for .js.coffee assets and views
 gem 'uglifier', '>= 1.3.0'     # Use Uglifier as compressor for JavaScript assets
 gem 'autoprefixer-rails'       # Adds browser vendor prefixes automatically
@@ -67,12 +67,12 @@ end
 # TESTING
 group :development, :test do
   gem 'spring-commands-rspec'
-  gem 'rspec-rails', '~> 3.0.2' # Use rspec for testing
+  gem 'rspec-rails', '~> 3.1.0' # Use rspec for testing
   gem 'factory_girl_rails'
   gem 'guard-rspec'        # Watches our app for changes, to automatically and selectively run tests
   # gem 'rb-fsevent' if `uname` =~ /Darwin/
   if ENV['SAUCY']
-    gem 'sauce', '~> 3.1.1'
+    gem 'sauce', '~> 3.5.3'
     gem 'sauce-connect'
     gem 'parallel_tests'
   end
