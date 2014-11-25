@@ -12,7 +12,6 @@ module ::Concerns::Ability::Student
     end
   end
 
-
   def student_resource_abilities
     # all students can create or vote on resources
     can [:create, :vote_on], ::Resource
