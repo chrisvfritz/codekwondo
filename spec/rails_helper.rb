@@ -20,8 +20,8 @@ if ENV['SAUCY']
     config[:browsers] = [
       ['Linux',        'Chrome', nil],
       ['OS X 10.10.1', 'Chrome', nil],
-      ['Windows 7',    'Chrome', nil],
-      ['Windows 8',    'Chrome', nil]
+      ['Windows 8',    'Chrome', nil],
+      ['Windows 7',    'Chrome', nil]
     ]
   end
 end
