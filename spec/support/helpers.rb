@@ -1,3 +1,3 @@
 RSpec.configure do |config|
-  config.include Omniauth::SessionHelpers, type: :feature
+  config.include OmniauthHelpers::SessionHelpers, type: :feature
 end

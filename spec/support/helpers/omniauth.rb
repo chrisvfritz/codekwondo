@@ -1,4 +1,4 @@
-module Omniauth
+module OmniauthHelpers
 
   module SessionHelpers
 
