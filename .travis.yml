@@ -32,7 +32,7 @@ deploy:
     repo: chrisvfritz/codekwondo
   run: "bundle exec rake db:migrate"
 
-bundler_args: --without development --without production
+bundler_args: --without development production
 
 script:
   - bundle exec rspec
