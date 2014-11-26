@@ -35,4 +35,4 @@ deploy:
 bundler_args: --without development production
 
 script:
-  - SAUCY=true bundle exec rspec
+  - bundle exec rspec

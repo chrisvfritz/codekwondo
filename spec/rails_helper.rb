@@ -18,10 +18,8 @@ if ENV['SAUCY']
 
   Sauce.config do |config|
     config[:browsers] = [
-      ['Linux',        'Chrome', nil],
-      ['OS X 10.10.1', 'Chrome', nil],
-      ['Windows 8',    'Chrome', nil],
-      ['Windows 7',    'Chrome', nil]
+      ['Linux', 'Chrome', nil],
+      ['Linux', 'Firefox', nil]
     ]
   end
 end

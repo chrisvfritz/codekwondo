@@ -72,7 +72,7 @@ group :development, :test do
   gem 'guard-rspec'        # Watches our app for changes, to automatically and selectively run tests
   # gem 'rb-fsevent' if `uname` =~ /Darwin/
   if ENV['SAUCY']
-    gem 'sauce', '~> 3.5.3'
+    gem 'sauce', '~> 3.1.1'
     gem 'sauce-connect'
     gem 'parallel_tests'
   end
