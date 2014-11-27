@@ -58,6 +58,89 @@ feature 'Course show page' do
       end
     end
 
+    context 'in the table skill row' do
+
+      before(:each) do
+        signin
+        @user = User.first
+        @user.update_columns(username: '-!student')
+        @user_skills  = create_list(:skill, 3, creator: @user, course: @course)
+        visit course_path(@course)
+      end
+
+      context 'when the user is the creator of the skill' do
+
+        context 'there are NO project completions for the skill' do
+
+          it 'should show an edit button for the skill' do
+            @user_skills.each do |skill|
+              within "#skill_#{skill.id}" do
+                expect(page).to have_link( 'Edit', edit_skill_path(skill) )
+              end
+            end
+          end
+
+          it 'should show a delete button for the skill' do
+            @user_skills.each do |skill|
+              within "#skill_#{skill.id}" do
+                expect(page).to have_link( 'Delete', skill_path(skill) )
+              end
+            end
+          end
+
+        end
+
+        context 'there are project completions for the skill' do
+
+          before(:each) do
+            @completed_skill = @user_skills.first
+            create :project_completion, project: create(:project, skill: @completed_skill)
+            visit course_path(@course)
+          end
+
+          it 'should NOT show an edit button for the skill' do
+            within "#skill_#{@completed_skill.id}" do
+              expect(page).not_to have_link( 'Edit', edit_skill_path(@completed_skill) )
+            end
+          end
+
+          it 'should NOT show a delete button for the skill' do
+            within "#skill_#{@completed_skill.id}" do
+              expect(page).not_to have_link( 'Delete', skill_path(@completed_skill) )
+            end
+          end
+
+        end
+
+      end
+
+      context 'when the user is NOT the creator of the skill' do
+
+        before(:each) do
+          @other_skills = create_list :skill, 3, course: @course
+          visit course_path(@course)
+        end
+
+        it 'should NOT show an edit button for the skill' do
+          @other_skills.each do |skill|
+            within "#skill_#{skill.id}" do
+              expect(page).not_to have_link( 'Edit', edit_skill_path(skill) )
+            end
+          end
+        end
+
+        it 'should NOT show a delete button for the skill' do
+          @other_skills.each do |skill|
+            within "#skill_#{skill.id}" do
+              expect(page).not_to have_link( 'Delete', skill_path(skill) )
+            end
+          end
+        end
+
+      end
+
+    end
+
   end
 
 end
