@@ -89,4 +89,6 @@ end
 
 group :production do
   gem 'rails_12factor' # Makes assets and logs functional on Heroku
+  gem 'rollbar', '~> 1.2.7'
+  gem 'newrelic_rpm'
 end
