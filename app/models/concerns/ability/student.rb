@@ -28,9 +28,14 @@ module ::Concerns::Ability::Student
   end
 
   def student_project_abilities
-    # project can be created by the creator of its course
+    # project can be created by the creator of its skill
     can :create, ::Project do |project|
-      project.skill.course.creator == user
+      project.skill.creator == user
+    end
+
+    # project can be created by the creator of its skill
+    can :create_project_for, ::Skill do |skill|
+      skill.creator == user
     end
 
     # project can be updated or destroyed by the project creator if no one has started it

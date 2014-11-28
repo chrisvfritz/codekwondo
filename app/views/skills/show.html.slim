@@ -20,7 +20,7 @@
   .col-sm-6
     h3
       ' Projects
-      - if can? :create, Project
+      - if can? :create_project_for, @skill
         = link_to new_skill_project_path(@skill) do
           .glyphicon.glyphicon-plus-sign
     - if @skill.projects.any?
