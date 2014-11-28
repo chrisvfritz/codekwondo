@@ -19,7 +19,7 @@ module ::Concerns::User::Stackoverflow
       Rails.cache.fetch("stackoverflow_questions: #{so_ids}, options: #{options}, version: 3", expires_in: 10.minutes) do
 
         # Get last 30 questions for each user connected to Stack Overflow, grouped by user
-        Array( RubyStackoverflow.users_questions(so_ids).data ).
+        Array( RubyStackoverflow.users_questions(so_ids, options).data ).
           # Map all the questions into a single array
           map(&:questions).flatten.
           # Weed out any questions that have an accepted answer
