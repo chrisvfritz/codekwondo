@@ -34,4 +34,31 @@ describe User do
     end
   end
 
+  describe '#completed_courses' do
+    before(:each) do
+      @user = create :user
+    end
+
+    context 'when the user has completed NO courses' do
+      it 'should return an empty array' do
+        expect(@user.completed_courses).to eq( [] )
+      end
+    end
+
+    context 'when the user has completed courses' do
+      before(:each) do
+        @completed_course = create(:course, creator: @user)
+        skill = create :skill, course: @completed_course
+        project = create :project, :with_criteria, skill: skill
+
+        create :project_completion, :completed, project: project, user: @user
+      end
+
+      it 'should return an array of the completed courses' do
+        expect(@user.completed_courses).to eq( [@completed_course] )
+      end
+    end
+
+  end
+
 end

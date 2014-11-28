@@ -45,12 +45,4 @@ class User < ActiveRecord::Base
     end
   end
 
-  def mastered_skills
-    project_completions.includes(:project).select do |project|
-      project.completed?
-    end.map do |completion|
-      completion.project.skill
-    end.uniq
-  end
-
 end
