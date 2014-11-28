@@ -94,7 +94,7 @@ feature 'Course show page' do
 
           before(:each) do
             @completed_skill = @user_skills.first
-            create :project_completion, project: create(:project, skill: @completed_skill)
+            create :project_completion, project: create(:project, :with_criteria, skill: @completed_skill)
             visit course_path(@course)
           end
 

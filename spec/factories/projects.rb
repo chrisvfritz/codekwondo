@@ -6,8 +6,10 @@ FactoryGirl.define do
     association :skill,   factory: :skill
     association :creator, factory: :user
 
-    after(:build) do |project|
-      project.criteria << build(:project_criterion)
+    trait :with_criteria do
+      after(:build) do |project|
+        project.criteria << build(:project_criterion, project: project)
+      end
     end
   end
 

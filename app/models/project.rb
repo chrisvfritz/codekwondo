@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
   belongs_to :creator, class_name: 'User'
   belongs_to :skill
 
-  has_many :criteria, class_name: 'ProjectCriterion'
+  has_many :criteria, class_name: 'ProjectCriterion', inverse_of: :project
   accepts_nested_attributes_for :criteria, reject_if: :all_blank, allow_destroy: true
 
   has_many :completions, class_name: 'ProjectCompletion'
