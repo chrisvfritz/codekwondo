@@ -1,6 +1,2 @@
 - flash.each do |type, message|
-  .alert.slide.up class="#{bootstrap_class_for(type)}"
-    button.close type='button' data-dismiss='alert'
-      span aria-hidden='true' &times;
-      span.sr-only Close
-    = message
+  = render 'shared/alert', type: type, message: message

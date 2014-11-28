@@ -3,4 +3,9 @@
 
 h1 New resource
 
-== render 'form'
+- if @resource.skill || (@course_id && (@skills = Skill.where(course_id: @course_id)).any?)
+  == render 'form'
+- elsif !@course_id
+  = render 'shared/alert', type: :error, message: 'Course to save a resource for must be specified as a URL parameter.'
+- elsif @skills.none?
+  = render 'shared/alert', type: :error, message: 'Skills need to exist before resources can be saved.'

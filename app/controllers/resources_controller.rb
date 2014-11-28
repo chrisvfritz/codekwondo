@@ -15,7 +15,7 @@ class ResourcesController < ApplicationController
 
   def create
     @course_id = session[:resources_bookmarklet_course_id]
-    is_from_bookmarklet = params[:resource][:skill].present?
+    is_from_bookmarklet = session[:resources_bookmarklet_course_id]
     params[:skill_id] ||= params[:resource][:skill]
     @resource = @skill.present? ? @skill.resources.build(resource_params.merge(creator_id: current_user.id)) : Resource.new(resource_params.merge(creator_id: current_user.id))
 
@@ -23,7 +23,13 @@ class ResourcesController < ApplicationController
       if @resource.save
         session.delete(:resources_bookmarklet_course_id)
         current_user.likes @resource
-        format.html { redirect_to (is_from_bookmarklet ? @resource.url : @resource.skill), notice: 'Resource was successfully created.' }
+        format.html do
+          if is_from_bookmarklet
+            redirect_to @resource.url
+          else
+            redirect_to @resource.skill, notice: 'Resource was successfully created.'
+          end
+        end
       else
         format.html { render :new }
       end
