@@ -32,16 +32,13 @@ feature 'Stack Overflow connect button' do
 
       it 'does NOT display connect stack overflow button' do
         signin
-        user = User.first
-        user.update_columns(stackoverflow_id: 1)
+        User.first.update_attributes(stackoverflow_id: 1)
 
         visit root_path
 
         within '#navbar_links' do
           expect(page).not_to have_link('Connect Stack Overflow')
         end
-
-        user.update_columns(stackoverflow_id: nil)
       end
 
     end
