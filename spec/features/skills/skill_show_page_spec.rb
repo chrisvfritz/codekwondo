@@ -35,10 +35,25 @@ feature 'Skill show page' do
 
       before(:each) do
         @other_skill = create :skill, creator: create(:user)
+        visit skill_path(@other_skill)
       end
 
       it 'should NOT have a link to create a new project' do
         expect(page).not_to have_link('', href: new_skill_project_path(@other_skill))
+      end
+
+      context 'but IS an instructor' do
+
+        before(:each) do
+          @user = User.first
+          @user.update_columns(username: '-!instructor')
+          visit skill_path(@other_skill)
+        end
+
+        it 'should show an edit skill button' do
+          expect(page).to have_link('Edit Skill')
+        end
+
       end
 
     end
@@ -47,6 +62,10 @@ feature 'Skill show page' do
 
       it 'should have a link to create a new project' do
         expect(page).to have_link('', href: new_skill_project_path(@skill))
+      end
+
+      it 'should show the creator of the skill' do
+         expect(page).to have_link('Edit Skill')
       end
 
     end

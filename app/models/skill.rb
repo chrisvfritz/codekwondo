@@ -23,7 +23,17 @@ class Skill < ActiveRecord::Base
 
   def related_stackoverflow_questions
     Rails.cache.fetch("related_stackoverflow_questions: {skill_id: #{self.title}, tags: #{self.tag_list}, version: 6}", expires_in: 1.day) do
-      RubyStackoverflow.similar(self.title, { tagged: self.tag_list.join(';'), pagesize: 10, sort: 'relevance', order: 'desc' }).data.map do |question|
+      Array(
+        RubyStackoverflow.similar(
+          self.title,
+          {
+            tagged: self.tag_list.join(';'),
+            pagesize: 10,
+            sort: 'relevance',
+            order: 'desc'
+          }
+        ).data
+      ).map do |question|
         OpenStruct.new(JSON.parse(question.to_json))
       end
     end
