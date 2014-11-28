@@ -14,8 +14,7 @@ class ResourcesController < ApplicationController
   end
 
   def create
-    @course_id = session[:resources_bookmarklet_course_id]
-    is_from_bookmarklet = session[:resources_bookmarklet_course_id]
+    is_from_bookmarklet = @course_id = session[:resources_bookmarklet_course_id]
     params[:skill_id] ||= params[:resource][:skill]
     @resource = @skill.present? ? @skill.resources.build(resource_params.merge(creator_id: current_user.id)) : Resource.new(resource_params.merge(creator_id: current_user.id))
 

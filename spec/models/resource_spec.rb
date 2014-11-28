@@ -51,4 +51,62 @@ describe Resource do
     end
   end
 
+  describe '#ci_lower_bound' do
+
+    before(:each) do
+      @resource = create :resource
+      @user = create :user
+    end
+
+    context 'when it has 0 votes' do
+      it 'should return 0' do
+        expect(@resource.ci_lower_bound).to eq(0)
+      end
+    end
+
+    context 'when it has 1 upvote' do
+      before(:each) { @resource.liked_by @user }
+      it 'should return 0.20654931654387707' do
+        expect(@resource.ci_lower_bound).to eq(0.20654931654387707)
+      end
+    end
+
+    context 'when it has 1 downvote' do
+      before(:each) { @resource.disliked_by @user }
+      it 'should return 0' do
+        expect(@resource.ci_lower_bound).to eq(0)
+      end
+    end
+
+  end
+
+  describe '#rating' do
+
+    before(:each) do
+      @resource = create :resource
+      @user = create :user
+    end
+
+    context 'when it has 0 votes' do
+      it 'should return 0' do
+        expect(@resource.rating).to eq(0)
+      end
+    end
+
+    context 'when it has 1 upvote' do
+      before(:each) { @resource.liked_by @user }
+      it 'should return 21' do
+        expect(@resource.rating).to eq(21)
+      end
+    end
+
+    context 'when it has 1 downvote' do
+      before(:each) { @resource.disliked_by @user }
+      it 'should return 0' do
+        expect(@resource.rating).to eq(0)
+      end
+    end
+
+  end
+
 end
