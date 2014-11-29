@@ -37,6 +37,16 @@ feature 'My courses index' do
       end
     end
 
+    it 'the courses should NOT be sortable' do
+      create_list :course, 2, creator: @user
+
+      visit courses_path
+
+      within '#courses_table' do
+        expect(page).not_to have_css('tbody.sortable')
+      end
+    end
+
     it 'should NOT list any courses not from this user' do
       create_list :course, 2, creator: @user
       other_courses = create_list :course, 2

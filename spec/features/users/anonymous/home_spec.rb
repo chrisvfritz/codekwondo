@@ -42,6 +42,36 @@ feature 'Homepage' do
       end
     end
 
+    context 'when the current user is an instructor' do
+      before(:each) do
+        signin
+        user = User.first
+        user.update_columns(username: '-!instructor')
+        visit root_path
+      end
+
+      it 'the courses should NOT be sortable' do
+        within '#courses_table' do
+          expect(page).not_to have_css('tbody.sortable')
+        end
+      end
+    end
+
+    context 'when the current user is an admin' do
+      before(:each) do
+        signin
+        user = User.first
+        user.update_columns(username: '-!admin')
+        visit root_path
+      end
+
+      it 'the courses should be sortable' do
+        within '#courses_table' do
+          expect(page).to have_css('tbody.sortable')
+        end
+      end
+    end
+
   end
 
 end
