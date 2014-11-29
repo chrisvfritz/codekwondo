@@ -1,5 +1,12 @@
 module ::Concerns::Ability::Student
 
+  def student_profile_abilities
+    # users can see their own profiles
+    can :show_profile_for, User do |current_user|
+      current_user == user
+    end
+  end
+
   def student_skill_abilities
     # skills can be created by people who created the course
     can :create, ::Skill do |skill|

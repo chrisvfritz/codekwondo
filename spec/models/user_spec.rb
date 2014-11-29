@@ -52,6 +52,9 @@ describe User do
         project = create :project, :with_criteria, skill: skill
 
         create :project_completion, :completed, project: project, user: @user
+
+        # create another course that should not be in the array
+        create :course, creator: @user
       end
 
       it 'should return an array of the completed courses' do

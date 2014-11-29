@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def profile
+    authorize! :show_profile_for, current_user
     @user        = current_user
     @completions = @user.project_completions.includes(project: :skill).order(updated_at: :desc)
   end

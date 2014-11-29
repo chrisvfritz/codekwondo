@@ -50,4 +50,23 @@ describe ProjectCompletion do
     end
   end
 
+  describe '#completed?' do
+
+    context 'when NOT completed' do
+      before(:each) { @completion = create(:project_completion, project: create(:project, :with_criteria)) }
+
+      it 'should return false' do
+        expect( @completion.completed? ).to eq(false)
+      end
+    end
+
+    context 'when completed' do
+      before(:each) { @completion = create(:project_completion, :completed, project: create(:project, :with_criteria)) }
+
+      it 'should return true' do
+        expect( @completion.completed? ).to eq(true)
+      end
+    end
+  end
+
 end

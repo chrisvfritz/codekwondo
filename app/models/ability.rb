@@ -48,6 +48,7 @@ private
   def student_abilities
     anonymous_abilities
 
+    student_profile_abilities
     student_skill_abilities
     student_resource_abilities
     student_project_abilities
