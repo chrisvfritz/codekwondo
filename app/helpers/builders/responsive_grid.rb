@@ -1,19 +1,21 @@
 # Helper class for dynamically building responsive_grid elements on the page. Simplifies
 # a lot of the ceremony in building up all the divs and classes.
-class Builders::ResponsiveGrid < Builders::Builder
+class Builders::ResponsiveGrid
 
   DEFAULT_ITEMS_PER_ROW = 3
   MAX_GRID_COLUMNS = 12
+
+  attr_reader :template
+  delegate :capture, :content_tag, to: :template
 
   # @overload initialize( collection, options, &block )
   def initialize( collection, options={}, template, &block )
     options[:xs] ||= options[:sm] ||= options[:md] ||= options[:lg] ||= DEFAULT_ITEMS_PER_ROW
 
     @collection = collection
-    @options = options
-    @block = block
-
-    super options, template, &block
+    @options    = options
+    @block      = block
+    @template   = template
   end
 
   def render
