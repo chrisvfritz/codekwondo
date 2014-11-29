@@ -16,14 +16,20 @@ feature 'Stack Overflow connect button' do
 
     context 'but stack overflow has NOT been connected' do
 
-      it 'displays connect stack overflow button' do
+      before(:each) do
         signin
-
         visit root_path
+      end
 
+      it 'displays connect stack overflow button' do
         within '#navbar_links' do
           expect(page).to have_link('Connect Stack Overflow')
         end
+      end
+
+      it 'successfully connects to stack overflow' do
+        click_link 'Connect Stack Overflow'
+        expect(page).not_to have_link('Connect Stack Overflow')
       end
 
     end

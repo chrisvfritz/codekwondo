@@ -5,7 +5,7 @@ module ::Concerns::User::Stackoverflow
   def connect_stackoverflow(auth)
     self.stackoverflow_omniauth_hash = auth
 
-    self.stackoverflow_id  = auth.extra.raw_info.user_id
+    self.stackoverflow_id  = auth.uid
     self.stackoverflow_url = auth.info.urls.stackoverflow
 
     self.save
