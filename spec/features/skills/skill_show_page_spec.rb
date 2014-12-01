@@ -75,6 +75,71 @@ feature 'Skill show page' do
       expect(page).to have_content('New resource')
     end
 
+    context 'when resources do NOT exist' do
+      it 'should say that no resources have been added yet' do
+        expect(page).to have_content "No resources have been added yet."
+      end
+    end
+
+    context 'when resources exist' do
+
+      before(:each) do
+        @resources = create_list :resource, 3, skill: @skill
+        visit skill_path(@skill)
+      end
+
+      it 'should list resources' do
+        within '#resources_table' do
+          @resources.each do |resource|
+            expect(page).to have_link(resource.title)
+          end
+        end
+      end
+
+      context 'when a resource has not yet been voted on' do
+
+        it 'should have a link to vote up' do
+          within '#resources_table' do
+            @resources.each do |resource|
+              expect(page).to have_link('', href: like_resource_path(resource))
+            end
+          end
+        end
+
+        it 'should have a link to vote down' do
+          within '#resources_table' do
+            @resources.each do |resource|
+              expect(page).to have_link('', href: dislike_resource_path(resource))
+            end
+          end
+        end
+
+        context 'the vote up button' do
+          before(:each) do
+            @resource = @resources.first
+            click_link '', href: like_resource_path(@resource)
+          end
+
+          it 'should vote up the resource' do
+            expect(User.first.liked?(@resource)).to be(true)
+          end
+        end
+
+        context 'the vote down button' do
+          before(:each) do
+            @resource = @resources.first
+            click_link '', href: dislike_resource_path(@resource)
+          end
+
+          it 'should vote down the resource' do
+            expect(User.first.disliked?(@resource)).to be(true)
+          end
+        end
+
+      end
+
+    end
+
   end
 
 end

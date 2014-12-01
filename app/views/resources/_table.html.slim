@@ -3,7 +3,7 @@
   - can_edit_any    = resources.any?{|resource| can? :update,  resource}
   - can_destroy_any = resources.any?{|resource| can? :destroy, resource}
 
-  table.table.table-striped
+  table#resources_table.table.table-striped
     tbody
       - resources.sort_by{|resource| [resource.rating, resource.created_at]}.reverse.each do |resource|
         tr
@@ -34,4 +34,4 @@
 
 - else
 
-  p No resources have been created yet.
+  p No resources have been added yet.

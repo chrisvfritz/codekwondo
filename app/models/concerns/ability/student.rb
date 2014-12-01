@@ -25,7 +25,7 @@ module ::Concerns::Ability::Student
 
     # resource can be updated by a user if they're the only one to have voted on it
     can :update, ::Resource do |resource|
-      resource.votes_for.count == 1 && resource.liked_by?(user)
+      resource.votes_for.count == 1 && user.liked?(resource)
     end
 
     # resource can be destroyed if it has a rating of less than 10 and the user created the course
