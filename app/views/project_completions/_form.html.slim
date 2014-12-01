@@ -2,9 +2,10 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :url
+    = f.input :github_repo_url, label: 'GitHub Repo', collection: current_user.repos.map{|r| [r.name, r.html_url]}
+    = f.input :url, label: 'Hosted URL'
 
-    p Check off project criteria as you meet them. When they're all checked, your implementation of this project will appear on your public portfolio.
+    p Check off project criteria as you meet them. When they're all checked, your implementation of this project will appear on your portfolio.
 
     = f.simple_fields_for :criteria_completion do |c|
       - f.object.project.criteria.each do |criterion|

@@ -1,13 +1,20 @@
 describe ProjectCompletion do
 
-  it { should validate_presence_of :url     }
-  it { should validate_presence_of :project }
-  it { should validate_presence_of :user    }
+  it { should validate_presence_of :url             }
+  it { should validate_presence_of :github_repo_url }
+  it { should validate_presence_of :project         }
+  it { should validate_presence_of :user            }
 
   it do
     create :project_completion, project: build(:project, :with_criteria)
     should validate_uniqueness_of(:url).scoped_to :project_id
   end
+
+  it do
+    create :project_completion, project: build(:project, :with_criteria)
+    should validate_uniqueness_of(:github_repo_url).scoped_to :project_id
+  end
+
   it { should validate_uniqueness_of(:user_id).scoped_to :project_id }
 
   context 'when creating a new project completion with valid data' do
@@ -47,6 +54,14 @@ describe ProjectCompletion do
       expect {
         create :project_completion, project: build(:project, :with_criteria), url: 'www.google.com/not_a_page'
       }.to raise_exception(ActiveRecord::RecordInvalid, "Validation failed: Url doesn't appear to be a page on www.google.com (404: Not Found)")
+    end
+  end
+
+  context 'when a github_repo_url does NOT match a URL of the user\'s existing repos' do
+    it 'should raise a validation error' do
+      expect {
+        create :project_completion, project: build(:project, :with_criteria), github_repo_url: 'www.google.com/not_a_page'
+      }.to raise_exception(ActiveRecord::RecordInvalid, "Validation failed: That's odd. This repo doesn't belong to you. Suspicious activity has been logged.")
     end
   end
 

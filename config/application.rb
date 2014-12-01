@@ -37,8 +37,8 @@ module Codekwondo
     end
 
     # other generators
-    config.generators.assets      = false
-    config.generators.helper      = false
+    config.generators.assets = false
+    config.generators.helper = false
 
     config.autoload_paths << Rails.root.join('lib')
   end

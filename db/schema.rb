@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117225705) do
+ActiveRecord::Schema.define(version: 20141201213725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20141117225705) do
     t.hstore   "criteria_completion", default: {}, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "github_repo_url"
   end
 
   add_index "project_completions", ["project_id", "user_id"], name: "by_project_and_user", unique: true, using: :btree
@@ -135,6 +136,7 @@ ActiveRecord::Schema.define(version: 20141117225705) do
     t.integer  "stackoverflow_id"
     t.string   "stackoverflow_url"
     t.text     "github_omniauth_hash"
+    t.string   "github_token"
   end
 
   create_table "versions", force: true do |t|

@@ -1,18 +1,18 @@
 GIT
-  remote: git://github.com/plataformatec/simple_form.git
-  revision: abcbd0bef729a4347a5635e5670ab5420cc39350
-  specs:
-    simple_form (3.1.0)
-      actionpack (~> 4.0)
-      activemodel (~> 4.0)
-
-GIT
   remote: https://github.com/chrisvfritz/ruby-stackoverflow.git
   revision: 4ce9bf7776b71dea344bb2c79f213ce466266422
   specs:
     ruby-stackoverflow (0.0.2)
       httparty (~> 0.13.3)
       json
+
+GIT
+  remote: git://github.com/plataformatec/simple_form.git
+  revision: abcbd0bef729a4347a5635e5670ab5420cc39350
+  specs:
+    simple_form (3.1.0)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -104,6 +104,8 @@ GEM
     daemon_controller (1.2.0)
     database_cleaner (1.3.0)
     debug_inspector (0.0.2)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
     docile (1.1.5)
     erubis (2.7.0)
@@ -118,6 +120,14 @@ GEM
     ffi (1.9.6)
     formatador (0.2.5)
     fssm (0.2.10)
+    github_api (0.12.2)
+      addressable (~> 2.3)
+      descendants_tracker (~> 0.0.4)
+      faraday (~> 0.8, < 0.10)
+      hashie (>= 3.3)
+      multi_json (>= 1.7.5, < 2.0)
+      nokogiri (~> 1.6.3)
+      oauth2
     gretel (3.0.8)
       rails (>= 3.2.0)
     guard (2.9.0)
@@ -336,6 +346,7 @@ DEPENDENCIES
   colorize
   database_cleaner (~> 1.3.0)
   factory_girl_rails
+  github_api
   gretel (~> 3.0.8)
   guard-rspec
   imgkit (~> 1.5.0)

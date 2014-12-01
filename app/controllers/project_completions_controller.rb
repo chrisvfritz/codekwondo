@@ -49,7 +49,7 @@ class ProjectCompletionsController < ApplicationController
     default_capture_size = 1170
     default_thumbnail_size = 200
 
-    kit = IMGKit.new(@completion.url,
+    image = IMGKit.new(@completion.url,
       width: params[:width] || default_capture_size,
       height: params[:height] || default_capture_size,
       quality: params[:quality] || ((default_thumbnail_size.to_f / default_capture_size) * 100).ceil,
@@ -57,7 +57,7 @@ class ProjectCompletionsController < ApplicationController
     ).to_img(params[:format].to_sym)
 
     respond_to do |format|
-      format.jpg { send_data kit, type: 'image/jpeg', disposition: 'inline' }
+      format.jpg { send_data image, type: 'image/jpeg', disposition: 'inline' }
     end
   end
 
@@ -73,7 +73,7 @@ private
 
   def project_completion_params
     criteria_completion = params.require(:project_completion).fetch(:criteria_completion, nil).try(:permit!)
-    params.require(:project_completion).permit(:url).merge(criteria_completion: criteria_completion)
+    params.require(:project_completion).permit(:url, :github_repo_url).merge(criteria_completion: criteria_completion)
   end
 
 end

@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    where( provider: auth.provider, uid: auth.uid ).first_or_create do |user|
+    current_user = where( provider: auth.provider, uid: auth.uid ).first_or_create do |user|
       user.github_omniauth_hash = auth
 
       user.provider   = auth.provider
@@ -34,6 +34,11 @@ class User < ActiveRecord::Base
       user.image_url  = auth.info.image
       user.github_url = auth.info.urls.GitHub
     end
+
+    # update the github_token if it has changed
+    current_user.update_columns(github_token: auth.credentials.token) if auth.credentials.token != current_user.github_token
+
+    current_user
   end
 
   def completed_courses
@@ -44,6 +49,20 @@ class User < ActiveRecord::Base
         completed_skill_ids.include? skill_id
       end
     end
+  end
+
+  def repos
+    self.github_api.repos.all
+  rescue
+    []
+  end
+
+  def github_api
+    @github_api ||= Github.new(
+      oauth_token: self.github_token,
+      user: self.username,
+      ssl: { verify: false }
+    )
   end
 
 end

@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
     redirect_to root_url, notice: 'Signed in!'
   rescue
-    redirect_to root_url, notice: 'Authentication error!'
+    redirect_to root_url, alert: 'Authentication error!'
   end
 
   def destroy
@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    redirect_to root_url, notice: 'Authentication error'
+    redirect_to root_url, alert: 'Authentication error'
   end
 
 end
