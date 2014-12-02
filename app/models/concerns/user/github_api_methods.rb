@@ -4,16 +4,13 @@ module ::Concerns::User::GithubApiMethods
   def repos
     self.github_api.repos.all
   rescue
-    []
+    [ OpenStruct.new(html_url: '', name: 'Unable to connect to your GitHub repos!') ]
   end
-
-private
 
   def github_api
     @github_api ||= Github.new(
       oauth_token: self.github_token,
-      user: self.username,
-      ssl: { verify: false }
+      user: self.username
     )
   end
 
