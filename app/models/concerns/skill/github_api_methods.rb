@@ -6,8 +6,20 @@ module ::Concerns::Skill::GithubApiMethods
   # ---------
 
   included do
-    after_create :create_gist
-    after_update :update_gist
+    after_save :update_gist
+  end
+
+  def update_gist
+    return create_gist if self.gist_id.blank?
+
+    self.creator.github_api.gists.find(self.gist_id)
+
+    self.creator.github_api.gists.edit(
+      self.gist_id,
+      files: files_for_gist
+    )
+  rescue
+    false
   end
 
   def create_gist
@@ -18,17 +30,6 @@ module ::Concerns::Skill::GithubApiMethods
     )
 
     self.update_columns(gist_id: gist.id)
-  rescue
-    false
-  end
-
-  def update_gist
-    self.creator.github_api.gists.find(self.gist_id)
-
-    self.creator.github_api.gists.edit(
-      self.gist_id,
-      files: files_for_gist
-    )
   rescue
     false
   end
