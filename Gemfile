@@ -22,6 +22,7 @@ gem 'jbuilder', '~> 2.0'                                               # Build J
 gem 'simple_form', '~> 3.1.0.rc2', github: 'plataformatec/simple_form' # Simplifies form building
 gem 'cocoon', '~> 1.2.6'                                               # Simplifies dynamic, nested forms
 gem 'gretel', '~> 3.0.8'                                               # Simplifies breadcrumbing
+gem 'redcarpet', '~> 3.2.1'                                            # Interprets and converts markdown
 
 # ASSET PREPARATION
 gem 'sass-rails', '~> 4.0.5'   # Use SCSS for stylesheets

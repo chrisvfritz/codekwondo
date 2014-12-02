@@ -30,3 +30,7 @@ td.full {
 .table-striped > tbody > tr.completed {
   background: lighten($brand-success, 35%);
 }
+
+.project_criteria p {
+  margin-bottom: 0;
+}
