@@ -2,6 +2,7 @@ class Skill < ActiveRecord::Base
   include ::Concerns::Skill::DagMethods
   include ::Concerns::PaperTrail
   include ::Concerns::Skill::Validations
+  include ::Concerns::Skill::GithubApiMethods
 
   belongs_to :course
   belongs_to :primary_language, class_name: 'Language'

@@ -11,7 +11,7 @@ feature 'New project completion form' do
     it 'displays the user\'s public GitHub repos in the Github Repo select' do
       within '#project_completion_github_repo_url' do
         @user.repos.each do |repo|
-          expect( page.find("option[value='#{repo.url}']:last-child") ).to have_content(repo.title)
+          expect( page.find("option[value='#{repo.url}']") ).to have_content(repo.title)
         end
       end
     end

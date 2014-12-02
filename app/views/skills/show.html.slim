@@ -14,7 +14,10 @@
           .glyphicon.glyphicon-plus-sign
     == render 'resources/table', resources: @skill.resources
 
-    h3= link_to 'Slides', presentation_skill_path(@skill), target: '_blank'
+    h3
+      =' link_to 'Slides', presentation_skill_path(@skill), target: '_blank'
+      = link_to @skill.gist_url do
+        .glyphicon.glyphicon-comment.align-bottom
     iframe src=presentation_skill_path(@skill) width='100%' height='350px'
 
   .col-sm-6

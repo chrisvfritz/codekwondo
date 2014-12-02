@@ -60,4 +60,13 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  config.before(:each) do
+    allow_any_instance_of(User).to receive(:repos).and_return([
+      OpenStruct.new(html_url: 'https://github.com/mockuser/repo1', name: 'repo_1'),
+      OpenStruct.new(html_url: 'https://github.com/mockuser/repo2', name: 'repo_2')
+    ])
+    allow_any_instance_of(Skill).to receive(:create_gist).and_return(false)
+    allow_any_instance_of(Skill).to receive(:update_gist).and_return(false)
+  end
 end
