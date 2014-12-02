@@ -3,9 +3,9 @@ h2= project.title
 .well
   .row
     .col-sm-6
-      p= md_to_html project.description
+      p= md_to_html project.description, project.creator
     .col-sm-6
       p The final result must:
       ul.project_criteria
         - project.criteria.each do |criterion|
-          li= md_to_html criterion.description
+          li= md_to_html criterion.description, project.creator

@@ -28,4 +28,8 @@ private
     redirect_to root_url
   end
 
+  # def current_ability
+  #   current_user.ability
+  # end
+
 end

@@ -35,11 +35,11 @@
               ' (#{link_to 'Edit', edit_project_path(project)})
             - if can? :destroy, project
               | (#{link_to 'Delete', project, data: {confirm: "Are you sure you want to permanently delete the \"#{project.title}\" project?"}, method: :delete, class: 'text-danger'})
-          p= md_to_html project.description
+          p= md_to_html project.description, project.creator
           h5 Criteria:
           ul.project_criteria
             - project.criteria.each do |criterion|
-              li= md_to_html criterion.description
+              li= md_to_html criterion.description, project.creator
           - if can? :create, ProjectCompletion
             - project_completion = ProjectCompletion.find_by(project_id: project.id, user_id: current_user.id)
             - if project_completion

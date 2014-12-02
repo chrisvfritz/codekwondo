@@ -13,8 +13,8 @@ module ApplicationHelper
     end
   end
 
-  def md_to_html(markdown)
-    renderer = can?(:include_html_in, :markdown) ? TRUSTED_MARKDOWN : MARKDOWN
+  def md_to_html(markdown, creator)
+    renderer = creator.can?(:include_html_in, :markdown) ? TRUSTED_MARKDOWN : MARKDOWN
     renderer.render(markdown).html_safe
   end
 

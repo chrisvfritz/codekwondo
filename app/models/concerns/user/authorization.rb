@@ -45,4 +45,14 @@ module ::Concerns::User::Authorization
     scope :students,    -> { where.not(username: ADMIN_LIST + INSTRUCTOR_LIST + MENTOR_LIST)}
   end
 
+  # -------
+  # HELPERS
+  # -------
+
+  delegate :can?, :cannot?, to: :ability
+
+  def ability
+    @ability ||= ::Ability.new(self)
+  end
+
 end
