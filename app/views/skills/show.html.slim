@@ -3,6 +3,9 @@
 - if can? :update, @skill
   = link_to 'Edit Skill', edit_skill_path(@skill), class: 'btn btn-primary btn-block'
 
+- if user_signed_in? && !current_user.mentor? && current_user.project_completions.none?
+  = render 'shared/alert', type: :notice, message: "Welcome to your first skill! Typically, you'll want to take a look at the slides first, then at the resources for extra help. When you're feeling pretty comfortable with the content, try one of the projects by adding a showcase. Then for the curious-minded, the related Stack Overflow questions will often address common sources of confusion surrounding the topic."
+
 .row
 
   .col-sm-6
