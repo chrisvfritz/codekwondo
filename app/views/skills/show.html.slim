@@ -8,19 +8,11 @@
   .col-sm-6
 
     h3
-      ' Resources
-      - if can? :create, Resource
-        = link_to new_skill_resource_path(@skill) do
-          .glyphicon.glyphicon-plus-sign
-    == render 'resources/table', resources: @skill.resources
-
-    h3
       =' link_to 'Slides', presentation_skill_path(@skill), target: '_blank'
       = link_to @skill.gist_url do
         .glyphicon.glyphicon-comment.align-bottom
     iframe src=presentation_skill_path(@skill) width='100%' height='350px'
 
-  .col-sm-6
     h3
       ' Projects
       - if can? :create_project_for, @skill
@@ -46,9 +38,17 @@
               = link_to "#{'Completed! ' if project_completion.completed?}Edit showcase", edit_project_completion_path(project_completion), class: 'btn btn-primary btn-block'
             - else
               = link_to 'Add showcase', new_project_project_completion_path(project), class: 'btn btn-primary btn-block'
-
     - else
       p No projects have been created yet.
+
+  .col-sm-6
+
+    h3
+      ' Resources
+      - if can? :create, Resource
+        = link_to new_skill_resource_path(@skill) do
+          .glyphicon.glyphicon-plus-sign
+    == render 'resources/table', resources: @skill.resources
 
     h3 Related Stack Overflow Questions
     - if (questions = @skill.related_stackoverflow_questions).any?
