@@ -1,6 +1,6 @@
 class SkillsController < ApplicationController
   load_and_authorize_resource :course
-  load_and_authorize_resource :skill, through: :course, shallow: true, except: [:presentation]
+  load_and_authorize_resource :skill, through: :course, shallow: true, except: [:presentation, :sort]
 
   before_action :set_skill,  only: [:edit, :update, :destroy, :presentation]
   before_action :set_course, only: [:new, :create, :sort]
@@ -54,8 +54,9 @@ class SkillsController < ApplicationController
   end
 
   def sort
+    authorize! :sort_skills_for, @course
     params[:skill].each_with_index do |id, index|
-      Skill.where(id: id).update_all(position: index+1)
+      Skill.find(id).update_attribute(:position, index+1)
     end
     render nothing: true
   end
