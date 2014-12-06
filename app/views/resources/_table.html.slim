@@ -22,7 +22,7 @@
               = link_to dislike_resource_path(resource), method: :put do
                 span.glyphicon.glyphicon-thumbs-down
           td.full
-            =' link_to resource.title, resource.url
+            =' link_to resource.title, resource.url, target: '_blank'
           - if can_edit_any
             td
               - if can? :update, resource
