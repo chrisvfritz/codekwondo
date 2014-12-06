@@ -60,7 +60,7 @@
     #{ raw instance_variable_get("@#{model_name.pluralize}").map {|node| 'g.setNode('+node.id.to_s+',{label:"'+node.send(label_attribute).to_s+'",class:"'+node.send(class_attribute).to_s+'",width:32,height:32,shape:"circle",title:"'+node.send(title_attribute).to_s+'",pluralized_model:"'+plural_model_name+'",languages:"'+j(node.try(:language_breakdown).try(:to_json))+'"});' }.join("\n") }
 
     // Set up edges, no special attributes.
-    #{ raw "#{model_name.titleize}Relationship".constantize.includes(:prereq, model_name.to_sym).where("#{model_name}_id".to_sym => models.pluck(:id)).order('skills.position').map {|rel| 'g.setEdge('+rel.prereq.id.to_s+','+rel.send(model_name).id.to_s+',{lineInterpolate:"bundle"});' }.join("\n") }
+    #{ raw "#{model_name.titleize}Relationship".constantize.includes(:prereq, model_name.to_sym).where("#{model_name}_id".to_sym => models.pluck(:id)).order("#{plural_model_name}.position").map {|rel| 'g.setEdge('+rel.prereq.id.to_s+','+rel.send(model_name).id.to_s+',{lineInterpolate:"bundle"});' }.join("\n") }
 
     // Create the renderer
     var render = new dagreD3.render();
