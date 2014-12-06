@@ -28,6 +28,7 @@ private
     instructor_abilities
 
     admin_course_abilities
+    admin_project_abilities
   end
 
   def instructor_abilities

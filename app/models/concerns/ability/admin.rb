@@ -7,4 +7,8 @@ module ::Concerns::Ability::Admin
     end
   end
 
+  def admin_project_abilities
+    can :update, ::Project
+  end
+
 end
