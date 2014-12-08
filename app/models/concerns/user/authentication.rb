@@ -4,18 +4,19 @@ module ::Concerns::User::Authentication
   module ClassMethods
 
     def from_omniauth(auth)
-      where( provider: auth.provider, uid: auth.uid ).first_or_create do |user|
-        user.github_omniauth_hash = auth
+      user = find_or_initialize_by( provider: auth.provider, uid: auth.uid )
 
-        user.provider     = auth.provider
-        user.uid          = auth.uid
-        user.username     = auth.info.nickname
-        user.name         = auth.info.name
-        user.email        = auth.info.email
-        user.image_url    = auth.info.image
-        user.github_url   = auth.info.urls.GitHub
-        user.github_token = auth.credentials.token
-      end
+      user.update_attributes(
+        github_omniauth_hash: auth,
+        username: auth.info.nickname,
+        name: auth.info.name,
+        email: auth.info.email,
+        image_url: auth.info.image,
+        github_url: auth.info.urls.GitHub,
+        github_token: auth.credentials.token
+      )
+
+      user
     end
 
   end

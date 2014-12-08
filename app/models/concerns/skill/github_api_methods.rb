@@ -12,8 +12,6 @@ module ::Concerns::Skill::GithubApiMethods
   def update_gist
     return create_gist if self.gist_id.blank?
 
-    self.creator.github_api.gists.find(self.gist_id)
-
     self.creator.github_api.gists.edit(
       self.gist_id,
       files: files_for_gist
