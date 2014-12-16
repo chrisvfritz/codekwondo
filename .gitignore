@@ -13,6 +13,7 @@ dump.rdb
 *.rbc
 capybara-*.html
 /log
+**.log
 /tmp
 /db/*.sqlite3
 /public/system
