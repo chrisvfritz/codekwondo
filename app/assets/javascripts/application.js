@@ -14,7 +14,6 @@
 //= require jquery-ui/sortable
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require chosen-jquery
 //= require codemirror
 //= require codemirror/modes/xml
 //= require codemirror/modes/htmlmixed

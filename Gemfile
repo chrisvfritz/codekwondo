@@ -25,7 +25,7 @@ gem 'gretel', '~> 3.0.8'                                               # Simplif
 gem 'redcarpet', '~> 3.2.1'                                            # Interprets and converts markdown
 
 # ASSET PREPARATION
-gem 'sass-rails', '~> 5.0.0'   # Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.5'   # Use SCSS for stylesheets
 gem 'coffee-rails', '~> 4.1.0' # Use CoffeeScript for .js.coffee assets and views
 gem 'uglifier', '>= 1.3.0'     # Use Uglifier as compressor for JavaScript assets
 gem 'autoprefixer-rails'       # Adds browser vendor prefixes automatically
@@ -34,7 +34,6 @@ gem 'autoprefixer-rails'       # Adds browser vendor prefixes automatically
 gem 'bootstrap-sass', '~> 3.3.0' # Include Twitter Bootstrap
 gem 'jquery-rails'               # Include the jQuery JavaScript library
 gem 'jquery-ui-rails'            # Include the jQuery UI JavaScript library
-gem 'chosen-rails', '~> 1.2.0'   # Include the jQuery Chosen library
 gem 'codemirror-rails', '~> 4.4' # Include the CodeMirror JavaScript library
 
 # AUTHENTICATION
