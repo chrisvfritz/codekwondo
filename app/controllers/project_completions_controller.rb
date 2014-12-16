@@ -51,18 +51,22 @@ class ProjectCompletionsController < ApplicationController
     default_capture_size = 1170
     default_thumbnail_size = 200
 
-    params[:format] = ACCEPTABLE_SCREENSHOT_FORMATS.include?(params[:format]) ? params[:format] : ACCEPTABLE_SCREENSHOT_FORMATS.first
+    image_format = ACCEPTABLE_SCREENSHOT_FORMATS.include?(params[:format]) ? params[:format] : ACCEPTABLE_SCREENSHOT_FORMATS.first
 
     image = IMGKit.new(@completion.url,
       width: params[:width] || default_capture_size,
       height: params[:height] || default_capture_size,
       quality: params[:quality] || ((default_thumbnail_size.to_f / default_capture_size) * 100).ceil,
       'disable-smart-width' => true
-    ).to_img(params[:format].to_sym)
+    ).to_img(image_format.to_sym)
 
-    respond_to do |format|
-      format.jpg { send_data image, type: 'image/jpeg', disposition: 'inline' }
-    end
+    send_data image, type: 'image/jpeg', disposition: 'inline'
+
+    # For if I later accept any formats other than jpeg
+    #
+    # respond_to do |format|
+    #   format.jpg { send_data image, type: 'image/jpeg', disposition: 'inline' }
+    # end
   end
 
 private
