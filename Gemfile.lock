@@ -1,18 +1,18 @@
 GIT
-  remote: git://github.com/plataformatec/simple_form.git
-  revision: 558d91cd5c1f654f368d39b2d93ad85b4fbb544a
-  specs:
-    simple_form (3.1.0)
-      actionpack (~> 4.0)
-      activemodel (~> 4.0)
-
-GIT
   remote: https://github.com/chrisvfritz/ruby-stackoverflow.git
   revision: 4ce9bf7776b71dea344bb2c79f213ce466266422
   specs:
     ruby-stackoverflow (0.0.2)
       httparty (~> 0.13.3)
       json
+
+GIT
+  remote: git://github.com/plataformatec/simple_form.git
+  revision: 558d91cd5c1f654f368d39b2d93ad85b4fbb544a
+  specs:
+    simple_form (3.1.0)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
 
 GEM
   remote: https://rubygems.org/

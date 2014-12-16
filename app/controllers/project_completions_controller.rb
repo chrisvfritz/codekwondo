@@ -4,6 +4,8 @@ class ProjectCompletionsController < ApplicationController
   before_action :set_completion, only: [:show, :edit, :update, :destroy, :screenshot]
   before_action :set_project, only: [:new, :create]
 
+  ACCEPTABLE_SCREENSHOT_FORMATS = %w(jpg)
+
   def show
   end
 
@@ -48,6 +50,8 @@ class ProjectCompletionsController < ApplicationController
 
     default_capture_size = 1170
     default_thumbnail_size = 200
+
+    params[:format] = ACCEPTABLE_SCREENSHOT_FORMATS.include?(params[:format]) ? params[:format] : ACCEPTABLE_SCREENSHOT_FORMATS.first
 
     image = IMGKit.new(@completion.url,
       width: params[:width] || default_capture_size,
