@@ -25,7 +25,7 @@ gem 'gretel', '~> 3.0.8'                                               # Simplif
 gem 'redcarpet', '~> 3.2.1'                                            # Interprets and converts markdown
 
 # ASSET PREPARATION
-gem 'sass-rails', '~> 4.0.5'   # Use SCSS for stylesheets
+gem 'sass-rails', '~> 5.0.0'   # Use SCSS for stylesheets
 gem 'coffee-rails', '~> 4.1.0' # Use CoffeeScript for .js.coffee assets and views
 gem 'uglifier', '>= 1.3.0'     # Use Uglifier as compressor for JavaScript assets
 gem 'autoprefixer-rails'       # Adds browser vendor prefixes automatically
@@ -94,6 +94,6 @@ end
 
 group :production do
   gem 'rails_12factor' # Makes assets and logs functional on Heroku
-  gem 'rollbar', '~> 1.2.7'
+  gem 'rollbar', '~> 1.3'
   gem 'newrelic_rpm'
 end
