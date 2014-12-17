@@ -36,8 +36,8 @@ class ProjectCompletion < ActiveRecord::Base
     username = self.user.username
     repo     = self.github_repo_url.scan(/https:\/\/github\.com\/#{username}\/(.+)/)[0][0]
 
-    Rails.cache.fetch("github_issue: #{username}, repo: #{repo}, version: 1", expires_in: 30.minutes, force: options[:force]) do
-      self.user.github_api.get_request("repos/#{username}/#{repo}/issues").body
+    Rails.cache.fetch("github_issue: #{username}, repo: #{repo}, version: 2", expires_in: 30.minutes, force: options[:force]) do
+      self.user.github_api.get_request("repos/#{username}/#{repo}/issues?state=all").body
     end
   end
 
