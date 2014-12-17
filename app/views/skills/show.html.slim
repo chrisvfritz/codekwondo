@@ -59,7 +59,7 @@
         tbody
           - questions.each do |question|
             tr
-              td.votes
+              td.dontbreak
                 =' question.score
                 span.glyphicon.glyphicon-thumbs-up
               td.full= link_to question.title.html_safe, question.link

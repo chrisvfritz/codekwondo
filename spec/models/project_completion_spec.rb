@@ -7,15 +7,18 @@ describe ProjectCompletion do
 
   it do
     create :project_completion, project: build(:project, :with_criteria)
-    should validate_uniqueness_of(:url).scoped_to :project_id
+    should validate_uniqueness_of :url
   end
 
   it do
     create :project_completion, project: build(:project, :with_criteria)
-    should validate_uniqueness_of(:github_repo_url).scoped_to :project_id
+    should validate_uniqueness_of :github_repo_url
   end
 
-  it { should validate_uniqueness_of(:user_id).scoped_to :project_id }
+  it do
+    create :project_completion, project: build(:project, :with_criteria)
+    should validate_uniqueness_of(:user_id).scoped_to :project_id
+  end
 
   context 'when creating a new project completion with valid data' do
     before(:each) { @project_completion = create(:project_completion, project: build(:project, :with_criteria)) }

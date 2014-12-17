@@ -8,7 +8,6 @@ ruby '2.1.2'
 gem 'rails', '4.1.8' # The version of rails we're running
 gem 'pg'             # We're using the Postgresql (PG) database
 gem 'passenger'      # Trying out passenger as a replacement for unicorn
-# gem 'unicorn'      # Use unicorn as the app server
 
 # AR EXTENSIONS
 gem 'acts_as_list'

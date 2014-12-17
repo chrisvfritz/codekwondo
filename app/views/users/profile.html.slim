@@ -1,28 +1,57 @@
-h1 Portfolio for #{@user.name}
+- if can? :review, ProjectCompletion
 
-h2 Completed courses
+  - completions = ProjectCompletion.includes(:user, :project).completed.order('updated_at ASC').unreviewed
 
-- if (courses = @user.completed_courses).any?
+  h2 Unreviewed showcases (#{completions.count})
 
-  ul#completed_courses
-    - courses.each do |course|
-      li= course.title
+  table.table.table-striped
+    tbody
+      - completions.each do |completion|
+        tr
+          td.full= link_to completion.project.title, completion
+          td.dontbreak= completion.user.name
+          td= link_to 'URL', completion.url
+          td= link_to 'Repo', completion.github_repo_url
+          td= link_to 'Review', completion.github_new_issue_url, class: 'text-success'
+
+  h2 Users by completed showcases
+
+  - students_by_completions = User.students.includes(:project_completions).sort_by{|u| u.project_completions.completed.count}
+
+  table.table.table-striped
+    tbody
+      - students_by_completions.each do |student|
+        tr
+          td.full= student.name
+          td= student.project_completions.completed.count
 
 - else
 
-  p You haven't completed any courses yet.
+  h1 Portfolio for #{@user.name}
+
+  h2 Completed courses
+
+  - if (courses = @user.completed_courses).any?
+
+    ul#completed_courses
+      - courses.each do |course|
+        li= course.title
+
+  - else
+
+    p You haven't completed any courses yet.
 
 
-h2 Completed skills
+  h2 Completed skills
 
-- if @completions.any?
+  - if @completions.any?
 
-  = responsive_grid @completions, lg: 5, md: 4, sm: 3, xs: 2, id: 'completed_skills' do |completion|
+    = responsive_grid @completions, lg: 5, md: 4, sm: 3, xs: 2, id: 'completed_skills' do |completion|
 
-    = link_to project_completion_path(completion) do
-      = image_tag 'loading.gif', data: { original: screenshot_project_completion_path(completion, format: :jpg) }, class: 'img-responsive is_lazy'
-      h3.h4= completion.project.skill.title
+      = link_to project_completion_path(completion) do
+        = image_tag 'loading.gif', data: { original: screenshot_project_completion_path(completion, format: :jpg) }, class: 'img-responsive is_lazy'
+        h3.h4= completion.project.skill.title
 
-- else
+  - else
 
-  p You haven't mastered any skills yet.
+    p You haven't mastered any skills yet.
