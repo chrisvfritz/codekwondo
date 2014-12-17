@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202171835) do
+ActiveRecord::Schema.define(version: 20141216223321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,8 +51,10 @@ ActiveRecord::Schema.define(version: 20141202171835) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "github_repo_url"
+    t.boolean  "completed"
   end
 
+  add_index "project_completions", ["completed"], name: "index_project_completions_on_completed", using: :btree
   add_index "project_completions", ["project_id", "user_id"], name: "by_project_and_user", unique: true, using: :btree
 
   create_table "project_criteria", force: true do |t|

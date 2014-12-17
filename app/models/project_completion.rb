@@ -4,8 +4,6 @@ class ProjectCompletion < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
 
-  acts_as_commentable
-
   scope :completed,   -> { where(completed: true ) }
   scope :uncompleted, -> { where(completed: false) }
 
