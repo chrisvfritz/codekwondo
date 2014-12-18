@@ -22,7 +22,7 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - RAILS_ENV=test bundle exec rake db:migrate --trace
 
-before_install:
+before_deploy:
   - if [ "$TRAVIS_BRANCH" = "master" ]; then wget -qO- https://toolbelt.heroku.com/install.sh | sh; export PATH=$PATH:/usr/local/heroku/bin; heroku pgbackups:transfer codekwondo::DATABASE_URL codekwondo-staging::DATABASE_URL -a codekwondo-staging --confirm codekwondo-staging; fi
 
 deploy:
