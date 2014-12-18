@@ -6,7 +6,6 @@ env:
   global:
     - secure: "jpjjwqMa9J2yVFkSplxQB9cRKh6JRN1gWash8p+qAkubjVayLUKbokVwqlqjkbIfDw+e8giAN+AcuBdb8CNibfDLWfV0NgJeZPxZ4/Gryq1iTpYJMGr53GqUGbtNQNSKb83kMJYPXSRLgGkTD82OdTmQh5CyMI2UN9+btJcyLvY="
     - secure: "scIz0DAivmyfkl7GHOmIQ+V5Qwrh0d9pxhklEJ+q4ha92oHO49fLXP1NHsKoctDlYNaxnhGIMBYXxO6U324H6hgRbGhSl/LkhtGA+6IkfUleefhvWAGODlGIv1mla5VSfvveldZyTthw8MC/wqyawyJi79G8YrqZPtL4eQfZZTI="
-    - secure: "H3XRiMRRceekjjnGZA3Z1mfp4fRG/35j8YfKamKklN0TWCK1brJfZMNkuV+HWZkXDyQoxQGdIuQzoXFNWHMj25iHp7nxmZirPKM6Pwd+IrDAeJCwIsIxKZG0EVfYLhIgSiW662+X7yKZbB4jryqvNbUHqkDPOzMG/gX/YhfZbIQ="
     - SAUCY: true
   matrix:
     - DB: postgresql
@@ -23,7 +22,7 @@ before_script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
 
 before_deploy:
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh; heroku pgbackups:transfer codekwondo::DATABASE_URL codekwondo-staging::DATABASE_URL -a codekwondo-staging --confirm codekwondo-staging; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then wget -qO- https://toolbelt.heroku.com/install.sh | sh; export PATH=$PATH:/usr/local/heroku/bin; heroku pgbackups:transfer codekwondo::DATABASE_URL codekwondo-staging::DATABASE_URL -a codekwondo-staging --confirm codekwondo-staging; fi
 
 deploy:
   provider: heroku
