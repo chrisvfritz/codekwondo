@@ -2,7 +2,7 @@
 source 'https://rubygems.org'
 
 # The ruby version we're using
-ruby '2.1.2'
+ruby '2.1.5'
 
 # ESSENTIALS
 gem 'rails', '4.1.8' # The version of rails we're running
