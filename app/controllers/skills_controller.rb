@@ -63,7 +63,7 @@ class SkillsController < ApplicationController
 
   def presentation
     authorize! :read, @skill
-    render inline: @skill.presentation, layout: 'presentation'
+    render text: @skill.presentation, layout: 'presentation'
   end
 
 private
