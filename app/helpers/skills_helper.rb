@@ -4,8 +4,12 @@ module SkillsHelper
     %{<!-- EXAMPLE SLIDES -->
 
 # First Slide
+
 It's number one!
-Note: Make lots of funny jokes here, so people like you.
+
+Note:
+
+Make lots of funny jokes here, so people like you.
 
 --
 
