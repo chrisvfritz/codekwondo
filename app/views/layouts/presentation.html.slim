@@ -88,8 +88,10 @@ html lang="en"
           { src: '/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); }, callback: function() {
             $('p:has(img,video,iframe)').contents().unwrap();
           } },
-          { src: '/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '/revealjs/plugin/google-code-prettify/run_prettify.js', async: true, callback: function() { $('pre > code').addClass('prettyprint'); } },
           { src: '/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
           { src: '/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
         ]
       });
+
+    link href='/revealjs/css/google-code-prettify/theme.css' rel='stylesheet'
