@@ -29,7 +29,9 @@
             - if can? :update, project
               ' (#{link_to 'Edit', edit_project_path(project)})
             - if can? :destroy, project
-              | (#{link_to 'Delete', project, data: {confirm: "Are you sure you want to permanently delete the \"#{project.title}\" project?"}, method: :delete, class: 'text-danger'})
+              | (
+              = link_to 'Delete', project, data: {confirm: "Are you sure you want to permanently delete the \"#{project.title}\" project?"}, method: :delete, class: 'text-danger'
+              | )
           p= md_to_html project.description, project.creator
           h5 Criteria:
           ul.project_criteria
@@ -62,7 +64,7 @@
               td.dontbreak
                 =' question.score
                 span.glyphicon.glyphicon-thumbs-up
-              td.full= link_to question.title.html_safe, question.link
+              td.full= link_to question.title.html_safe, question.link, target: '_blank'
               td= '✔' if question.is_answered
     - else
       p No related questions were found.

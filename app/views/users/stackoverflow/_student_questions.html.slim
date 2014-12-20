@@ -2,4 +2,4 @@ table.table.table-striped
   tbody
     - questions.each do |question|
       tr
-        td= link_to question.title, question.link
+        td= link_to question.title, question.link, target: '_blank'
