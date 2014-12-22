@@ -44,6 +44,7 @@ private
     student_abilities
 
     mentor_course_abilities
+    mentor_project_abilities
     mentor_project_completion_abilities
   end
 

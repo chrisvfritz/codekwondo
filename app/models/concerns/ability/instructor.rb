@@ -14,6 +14,10 @@ module ::Concerns::Ability::Instructor
     end
   end
 
+  def instructor_project_abilities
+    can :update, ::Project
+  end
+
   def instructor_html_abilities
     can :include_html_in, :markdown
   end

@@ -15,6 +15,10 @@ module ::Concerns::Ability::Mentor
     end
   end
 
+  def mentor_project_abilities
+    can :create, ::Project
+  end
+
   def mentor_project_completion_abilities
     can :review, ::ProjectCompletion
   end
