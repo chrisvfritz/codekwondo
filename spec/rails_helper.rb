@@ -9,26 +9,9 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'capybara/poltergeist'
 
-if ENV['SAUCY']
-
-  require 'sauce'
-  require 'sauce/capybara'
-
-  Capybara.javascript_driver = :sauce
-
-  Sauce.config do |config|
-    config[:browsers] = [
-      ['Linux', 'Chrome', nil]
-    ]
-  end
-
-else
-
-  require 'capybara/poltergeist'
-  Capybara.javascript_driver = :poltergeist
-
-end
+Capybara.javascript_driver = :poltergeist
 
 require_relative 'support/capybara'
 require_relative 'support/database_cleaner'

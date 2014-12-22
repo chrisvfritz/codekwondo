@@ -8,21 +8,21 @@
       - resources.sort_by{|resource| [resource.rating, resource.created_at]}.reverse.each do |resource|
         tr
           td.dontbreak
-            =' resource.get_upvotes.count
+            => resource.get_upvotes.count
             - if !can?(:vote_on, resource) || current_user.liked?(resource)
-              span.glyphicon.glyphicon-thumbs-up'
+              span.glyphicon.glyphicon-thumbs-up>
             - else
               = link_to like_resource_path(resource), method: :put do
                 span.glyphicon.glyphicon-thumbs-up
           td.dontbreak
-            =' resource.get_downvotes.count
+            => resource.get_downvotes.count
             - if !can?(:vote_on, resource) || current_user.disliked?(resource)
               span.glyphicon.glyphicon-thumbs-down
             - else
               = link_to dislike_resource_path(resource), method: :put do
                 span.glyphicon.glyphicon-thumbs-down
           td.full
-            =' link_to resource.title, resource.url, target: '_blank'
+            => link_to resource.title, resource.url, target: '_blank'
           - if can_edit_any
             td
               - if can? :update, resource

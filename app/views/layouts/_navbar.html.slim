@@ -17,12 +17,12 @@ nav.navbar.navbar-inverse
           - if current_user.stackoverflow_id.blank?
             li= link_to 'Connect Stack Overflow', '/auth/stackexchange'
           li= link_to user_profile_path do
-            .glyphicon.glyphicon-user'
+            .glyphicon.glyphicon-user>
             = current_user.name
           li= link_to signout_path, method: :delete do
-            span.glyphicon.glyphicon-log-out'
+            span.glyphicon.glyphicon-log-out>
             | Sign out
         - else
           li= link_to '/auth/github' do
-            span.glyphicon.glyphicon-log-in'
+            span.glyphicon.glyphicon-log-in>
             | Sign in with github

@@ -74,11 +74,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'guard-rspec'        # Watches our app for changes, to automatically and selectively run tests
   gem 'rubocop', require: false
-  if ENV['SAUCY']
-    gem 'sauce'
-    gem 'sauce-connect'
-    gem 'parallel_tests'
-  end
 end
 
 group :test do

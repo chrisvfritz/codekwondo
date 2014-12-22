@@ -11,7 +11,7 @@
   .col-sm-6
 
     h3
-      =' link_to 'Slides', presentation_skill_path(@skill), target: '_blank'
+      => link_to 'Slides', presentation_skill_path(@skill), target: '_blank'
       = link_to @skill.gist_url do
         .glyphicon.glyphicon-comment.align-bottom
     iframe src=presentation_skill_path(@skill) width='100%' height='350px'
@@ -25,7 +25,7 @@
       - @skill.projects.each do |project|
         .well
           h4.block-tight-top
-            =' link_to project.title, project
+            => link_to project.title, project
             - if can? :update, project
               ' (#{link_to 'Edit', edit_project_path(project)})
             - if can? :destroy, project
@@ -62,7 +62,7 @@
           - questions.each do |question|
             tr
               td.dontbreak
-                =' question.score
+                => question.score
                 span.glyphicon.glyphicon-thumbs-up
               td.full= link_to question.title.html_safe, question.link, target: '_blank'
               td= '✔' if question.is_answered
