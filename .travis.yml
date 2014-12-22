@@ -3,6 +3,8 @@ rvm:
   - 2.1.5
 
 env:
+  global:
+    - secure: "cirQFKEF/YuWW9qP7/6iAaglilJhxkve4fPb8y5qet4mkRv2HyoVLZ72VcdyG0UWp+ITRD4w2jzzReUdWOvY2EpBmjIf5rrfsYp/kwWPUP/4LPtqqG1l+KE8aQVnpU1dBOSCK1gB5a0JMTkbvcMkgtdDaVPAC5dSfI5SpN/zpiw="
   matrix:
     - DB: postgresql
 
