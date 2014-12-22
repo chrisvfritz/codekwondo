@@ -2,7 +2,6 @@ feature 'New project form' do
 
   before(:each) do
     signin
-    @user = User.first
     @skill = create(:skill)
     visit new_skill_project_path(@skill)
   end
@@ -14,7 +13,7 @@ feature 'New project form' do
     end
 
     it 'should redirect to the root url' do
-      expect(current_url).to eq(root_url)
+      expect(current_path).to eq(root_path)
     end
 
   end
@@ -22,7 +21,7 @@ feature 'New project form' do
   context 'when mentor is signed in' do
 
     before(:each) do
-      @user.update_column(:username, '-!mentor')
+      User.first.update_column(:username, '-!mentor')
       visit new_skill_project_path(@skill)
     end
 
