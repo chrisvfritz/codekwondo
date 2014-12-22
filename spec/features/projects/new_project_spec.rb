@@ -1,12 +1,16 @@
 feature 'New project form' do
 
   before(:each) do
+    User.destroy_all
     signin
     @skill = create(:skill)
-    visit new_skill_project_path(@skill)
   end
 
   context 'when student is signed in' do
+
+    before(:each) do
+      visit new_skill_project_path(@skill)
+    end
 
     it 'should display an unauthorized message' do
       expect(page).to have_content('You are not authorized to access this page.')

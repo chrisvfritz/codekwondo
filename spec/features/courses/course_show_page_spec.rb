@@ -42,12 +42,16 @@ feature 'Course show page' do
       visit course_path(@course)
     end
 
-    it 'should show a dag with nodes for each skill', js: true do
-      within '#dag' do
-        @course.skills.each do |skill|
-          expect(page).to have_css("circle[data-original-title='#{skill.title}']")
+    describe 'the dag', js: true do
+
+      it 'should show nodes for each skill' do
+        within '#dag' do
+          @course.skills.each do |skill|
+            expect(page).to have_css("circle[data-original-title='#{skill.title}']")
+          end
         end
       end
+
     end
 
     it 'should list each skill in a table' do

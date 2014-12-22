@@ -11,6 +11,7 @@ require 'capybara/rails'
 require 'capybara/rspec'
 
 if ENV['SAUCY']
+
   require 'sauce'
   require 'sauce/capybara'
 
@@ -18,10 +19,15 @@ if ENV['SAUCY']
 
   Sauce.config do |config|
     config[:browsers] = [
-      ['Linux', 'Chrome', nil],
-      ['Linux', 'Firefox', nil]
+      ['Linux', 'Chrome', nil]
     ]
   end
+
+else
+
+  require 'capybara/poltergeist'
+  Capybara.javascript_driver = :poltergeist
+
 end
 
 require_relative 'support/capybara'

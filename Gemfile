@@ -16,7 +16,7 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'acts-as-taggable-on', '~> 3.4'
 
 # TEMPLATING
-gem 'slim-rails', require: 'slim/logic_less'                           # Use slim for HTML templates (with logic-less mode for presentations)
+gem 'slim-rails', '~> 3.0.0'                                           # Use slim for HTML templates
 gem 'jbuilder', '~> 2.0'                                               # Build JSON APIs with ease
 gem 'simple_form', '~> 3.1.0.rc2', github: 'plataformatec/simple_form' # Simplifies form building
 gem 'cocoon', '~> 1.2.6'                                               # Simplifies dynamic, nested forms
@@ -75,7 +75,7 @@ group :development, :test do
   gem 'guard-rspec'        # Watches our app for changes, to automatically and selectively run tests
   gem 'rubocop', require: false
   if ENV['SAUCY']
-    gem 'sauce', '~> 3.1.1'
+    gem 'sauce'
     gem 'sauce-connect'
     gem 'parallel_tests'
   end
@@ -86,7 +86,7 @@ group :test do
   gem 'shoulda-matchers', '~> 2.7.0', require: false
   gem 'database_cleaner', '~> 1.3.0'
   gem 'launchy', '~> 2.4.3'
-  gem 'selenium-webdriver', '~> 2.44.0'
+  gem 'poltergeist'
   gem 'codeclimate-test-reporter', require: nil
 end
 
