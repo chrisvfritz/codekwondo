@@ -8,7 +8,7 @@ feature 'New course form' do
     end
 
     it 'should redirect to root' do
-      expect(page).to have_xpath(root_path)
+      expect(current_path).to eq(root_path)
     end
 
     it 'should display a not authorized message' do

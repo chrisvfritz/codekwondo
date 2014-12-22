@@ -3,7 +3,7 @@
 
   .form-inputs
     = f.input :title
-    = f.association :primary_language, collection: Language.all
+    = f.association :primary_language, collection: Language.order(:name)
     = f.input :tag_list, label: 'Stack Overflow tags'
     - other_skills = @skill.course.skills.where.not(id: f.object.id)
     - if other_skills.any?
