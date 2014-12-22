@@ -73,7 +73,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.1.0' # Use rspec for testing
   gem 'factory_girl_rails'
   gem 'guard-rspec'        # Watches our app for changes, to automatically and selectively run tests
-  # gem 'rb-fsevent' if `uname` =~ /Darwin/
+  gem 'rubocop', require: false
   if ENV['SAUCY']
     gem 'sauce', '~> 3.1.1'
     gem 'sauce-connect'

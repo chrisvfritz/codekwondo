@@ -1,0 +1,10 @@
+AllCops:
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+    - '**/*.rake'
+    - '**/Gemfile'
+    - '**/Gemfile.devtools'
+  Exclude:
+    - '**/vendor/**/*'
+  RunRailsCops: true
