@@ -1,5 +1,9 @@
 describe Resource do
 
+  before(:each) do
+    WebMock.disable!
+  end
+
   it { should validate_presence_of :title   }
   it { should validate_presence_of :url     }
   it { should validate_presence_of :skill   }

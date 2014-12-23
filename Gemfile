@@ -74,6 +74,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'guard-rspec'        # Watches our app for changes, to automatically and selectively run tests
   gem 'rubocop', require: false
+  gem 'sinatra'
 end
 
 group :test do
@@ -83,6 +84,7 @@ group :test do
   gem 'launchy', '~> 2.4.3'
   gem 'poltergeist'
   gem 'codeclimate-test-reporter', require: nil
+  gem 'webmock'
 end
 
 group :production do

@@ -37,6 +37,11 @@ describe ProjectCompletion do
   end
 
   context 'when passed a URL that is NOT formatted properly' do
+    before(:each) do
+      require 'webmock'
+      WebMock.allow_net_connect!
+    end
+
     it 'should return a message saying it is NOT a valid web address' do
       expect {
         create :project_completion, project: build(:project, :with_criteria), url: 'arst'
@@ -45,6 +50,11 @@ describe ProjectCompletion do
   end
 
   context 'when passed a URL that\'s formatted properly but has a domain that does NOT exist on the web' do
+    before(:each) do
+      require 'webmock'
+      WebMock.allow_net_connect!
+    end
+
     it 'should return a message saying it does NOT exist on the web' do
       expect {
         create :project_completion, project: build(:project, :with_criteria), url: 'oih1235oieh1235oihe12io3e5hoi1.com'

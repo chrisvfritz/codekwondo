@@ -16,7 +16,7 @@ module ::Concerns::User::Stackoverflow
     def stackoverflow_questions(options={})
       return [] if (so_ids = self.stackoverflow_ids).empty?
 
-      Rails.cache.fetch("stackoverflow_questions: #{so_ids}, options: #{options}, version: 3", expires_in: 10.minutes) do
+      Rails.cache.fetch("stackoverflow_questions: #{Base64.encode64( so_ids.join('') )}, options: #{options}, version: 3", expires_in: 10.minutes) do
 
         # Get last 30 questions for each user connected to Stack Overflow, grouped by user
         Array( RubyStackoverflow.users_questions(so_ids).data ).

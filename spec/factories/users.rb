@@ -12,6 +12,10 @@ FactoryGirl.define do
     trait(:mentor)     { username '-!mentor'     }
     trait(:instructor) { username '-!instructor' }
     trait(:admin)      { username '-!admin'      }
+
+    trait :with_stackoverflow_id do
+      stackoverflow_id { rand(1637442) }
+    end
   end
 
 end

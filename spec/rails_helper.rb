@@ -9,9 +9,18 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 require 'capybara/rails'
 require 'capybara/rspec'
-require 'capybara/poltergeist'
 
+require 'capybara/poltergeist'
 Capybara.javascript_driver = :poltergeist
+
+require 'webmock/rspec'
+WebMock.disable_net_connect!(
+  allow_localhost: true,
+  allow: [
+    /google.com/,
+    /oih1235oieh1235oihe12io3e5hoi1.com/ # example domain that will never exist
+  ]
+)
 
 require_relative 'support/capybara'
 require_relative 'support/database_cleaner'
@@ -19,6 +28,8 @@ require_relative 'support/factory_girl'
 require_relative 'support/omniauth'
 require_relative 'support/helpers/omniauth_helpers'
 require_relative 'support/helpers'
+require_relative 'support/fake_github'
+require_relative 'support/fake_stackoverflow'
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -53,7 +64,11 @@ RSpec.configure do |config|
       OpenStruct.new(html_url: 'https://github.com/mockuser/repo1', name: 'repo_1'),
       OpenStruct.new(html_url: 'https://github.com/mockuser/repo2', name: 'repo_2')
     ])
+
     allow_any_instance_of(Skill).to receive(:create_gist).and_return(false)
     allow_any_instance_of(Skill).to receive(:update_gist).and_return(false)
+
+    stub_request(:any, /api.github.com/).to_rack(FakeGithub)
+    stub_request(:any, /api.stackexchange.com/).to_rack(FakeStackoverflow)
   end
 end
