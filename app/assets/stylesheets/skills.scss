@@ -27,10 +27,8 @@ td.full {
   width: 100%;
 }
 
-.table-striped > tbody > tr.completed {
-  background: lighten($brand-success, 35%);
-}
-
-.project_criteria p {
-  margin-bottom: 0;
+.table-striped > tbody > tr {
+  &.read_only   { background: lighten($brand-info,    29%); }
+  &.in_progress { background: lighten($brand-warning, 25%); }
+  &.completed   { background: lighten($brand-success, 35%); }
 }

@@ -3,7 +3,7 @@
   table#skills_table.table.table-striped
     tbody data-update-url=sort_course_skills_path(skills.first.course) class="#{'sortable' if can?(:sort_skills_for, skills.first.course)}"
       - skills.each do |skill|
-        = content_tag_for :tr, skill, class: "#{'completed' if user_signed_in? && @completed_skills.include?(skill)}" do
+        = content_tag_for :tr, skill, class: skill_class(skill) do
           td= skill.position
           td.full= link_to skill.title, skill
           td

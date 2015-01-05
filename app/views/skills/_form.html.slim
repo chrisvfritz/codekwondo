@@ -8,6 +8,8 @@
     - other_skills = @skill.course.skills.where.not(id: f.object.id)
     - if other_skills.any?
       = f.association :prereqs, collection: other_skills, label: 'Prerequisites'
+    - if @skill.projects.none?
+      = f.input :read_only
     = f.input :presentation, label: 'Presentation (written in GitHub Flavored Markdown for RevealJS)', input_html: { value: f.object.presentation || example_skill_slides }
 
   .form-actions

@@ -6,6 +6,8 @@ module ::Concerns::Skill::DagMethods
   end
 
   def dag_class
-    primary_language.abbrev.downcase
+    [
+      primary_language.abbrev.downcase
+    ].join ' '
   end
 end
