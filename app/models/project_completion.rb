@@ -12,7 +12,7 @@ class ProjectCompletion < ActiveRecord::Base
 
   validates_presence_of :url, :github_repo_url, :project, :user
 
-  validates_uniqueness_of :url
+  validates_uniqueness_of :url, scope: :project_id
   validates_uniqueness_of :github_repo_url
   validates_uniqueness_of :user_id, scope: :project_id
 

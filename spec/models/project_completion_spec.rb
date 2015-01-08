@@ -7,7 +7,7 @@ describe ProjectCompletion do
 
   it do
     create :project_completion, project: build(:project, :with_criteria)
-    should validate_uniqueness_of :url
+    should validate_uniqueness_of(:url).scoped_to :project_id
   end
 
   it do
