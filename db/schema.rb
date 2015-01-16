@@ -11,11 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150105162703) do
+ActiveRecord::Schema.define(version: 20150115002826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "assignments", force: true do |t|
+    t.integer  "session_assigned_id"
+    t.integer  "session_due_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "course_relationships", force: true do |t|
     t.integer  "prereq_id"
@@ -36,6 +44,19 @@ ActiveRecord::Schema.define(version: 20150105162703) do
     t.boolean  "featured"
   end
 
+  create_table "enrollments", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "preferred_name"
+    t.integer  "section_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "enrollments", ["first_name", "last_name", "section_id"], name: "index_enrollments_on_first_name_and_last_name_and_section_id", unique: true, using: :btree
+  add_index "enrollments", ["section_id", "user_id"], name: "index_enrollments_on_section_id_and_user_id", unique: true, using: :btree
+
   create_table "languages", force: true do |t|
     t.string   "name"
     t.string   "abbrev"
@@ -47,11 +68,12 @@ ActiveRecord::Schema.define(version: 20150105162703) do
     t.integer  "project_id"
     t.integer  "user_id"
     t.string   "url"
-    t.hstore   "criteria_completion", default: {}, null: false
+    t.hstore   "criteria_completion", default: {},    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "github_repo_url"
     t.boolean  "completed"
+    t.boolean  "approved",            default: false
   end
 
   add_index "project_completions", ["completed"], name: "index_project_completions_on_completed", using: :btree
@@ -83,6 +105,26 @@ ActiveRecord::Schema.define(version: 20150105162703) do
     t.decimal  "price",      precision: 8, scale: 2
     t.integer  "creator_id"
   end
+
+  create_table "sections", force: true do |t|
+    t.integer  "course_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sections", ["course_id", "name"], name: "index_sections_on_course_id_and_name", unique: true, using: :btree
+
+  create_table "sessions", force: true do |t|
+    t.integer  "section_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.hstore   "attendence", default: {}, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["section_id", "start_time"], name: "index_sessions_on_section_id_and_start_time", unique: true, using: :btree
 
   create_table "skill_relationships", force: true do |t|
     t.integer  "prereq_id"

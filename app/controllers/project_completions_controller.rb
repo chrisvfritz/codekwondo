@@ -1,10 +1,18 @@
 class ProjectCompletionsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :project_completion, except: [:index, :screenshot, :approve]
 
-  before_action :set_completion, only: [:show, :edit, :update, :destroy, :screenshot]
+  before_action :set_completion, only: [:show, :edit, :update, :destroy, :screenshot, :approve]
   before_action :set_project, only: [:new, :create]
 
   ACCEPTABLE_SCREENSHOT_FORMATS = %w(jpg)
+
+  def index
+    authorize! :review, ProjectCompletion
+    completions = ProjectCompletion.includes(:user, :project).order('updated_at ASC') # .current
+    @unreviewed_completions = completions.completed.unreviewed
+    @unapproved_completions = completions.completed.reviewed.select { |completion| !completion.approved? }
+    # @awaited_completed      = completions.awaited
+  end
 
   def show
   end
@@ -67,6 +75,15 @@ class ProjectCompletionsController < ApplicationController
     # respond_to do |format|
     #   format.jpg { send_data image, type: 'image/jpeg', disposition: 'inline' }
     # end
+  end
+
+  def approve
+    authorize! :review, ProjectCompletion
+    @completion.approve
+
+    respond_to do |format|
+      format.html { redirect_to project_completions_path, notice: 'Showcase approved.' }
+    end
   end
 
 private

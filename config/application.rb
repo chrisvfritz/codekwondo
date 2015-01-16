@@ -41,5 +41,8 @@ module Codekwondo
     config.generators.helper = false
 
     config.autoload_paths << Rails.root.join('lib')
+
+    config.time_zone = 'Eastern Time (US & Canada)'
+    config.active_record.default_timezone = :local
   end
 end

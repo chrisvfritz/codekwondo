@@ -1,0 +1,35 @@
+h2 Unreviewed showcases (#{@unreviewed_completions.count})
+
+table.table.table-striped
+  tbody
+    - @unreviewed_completions.each do |completion|
+      tr
+        td.full= link_to completion.project.title, completion
+        td.dontbreak= completion.user.name
+        td= link_to 'URL', completion.url
+        td= link_to 'Repo', completion.github_repo_url
+        td= link_to 'Review', completion.github_new_issue_url, class: 'text-success'
+
+h2 Unapproved showcases (#{@unapproved_completions.count})
+
+table.table.table-striped
+  tbody
+    - @unapproved_completions.each do |completion|
+      tr
+        td.full= link_to completion.project.title, completion
+        td.dontbreak= completion.user.name
+        td= link_to 'URL', completion.url
+        td= link_to 'Repo', completion.github_repo_url
+        td= link_to 'Review', completion.review_url
+        td= link_to 'Approve', approve_project_completion_path(completion), method: :put, class: 'text-success'
+
+- students_by_completions = User.students.includes(:project_completions).sort_by{|u| u.project_completions.completed.count}
+
+h2 Users by completed showcases
+
+table.table.table-striped
+  tbody
+    - students_by_completions.each do |student|
+      tr
+        td.full= student.name
+        td= student.project_completions.completed.count

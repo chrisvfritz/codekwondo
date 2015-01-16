@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   serialize :github_omniauth_hash,        Hash
   serialize :stackoverflow_omniauth_hash, Hash
 
+  has_many :enrollments
+
   has_many :created_courses,   class_name: 'Course',   foreign_key: 'creator_id'
   has_many :created_skills,    class_name: 'Skill',    foreign_key: 'creator_id'
   has_many :created_resources, class_name: 'Resource', foreign_key: 'creator_id'

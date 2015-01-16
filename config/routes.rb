@@ -34,10 +34,13 @@ Rails.application.routes.draw do
       resources :projects, shallow: true, except: [:index] do
         resources :project_completions, path: '/showcases', except: [:index] do
           member { get :screenshot }
+          member { put :approve }
         end
       end
     end
   end
+
+  resources :project_completions, path: '/showcases', only: [:index]
 
   get 'users/profile', as: :user_profile
 

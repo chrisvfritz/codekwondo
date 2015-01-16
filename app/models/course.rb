@@ -5,6 +5,8 @@ class Course < ActiveRecord::Base
 
   belongs_to :creator, class_name: 'User'
 
+  has_many :sections
+
   has_many :skills
 
   has_many :course_relationships, dependent: :destroy
