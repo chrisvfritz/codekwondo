@@ -20,7 +20,9 @@ module ApplicationHelper
   def skill_class(skill)
     return 'read_only'   if skill.read_only
     return 'in_progress' if skill.projects.none?
-    return 'completed'   if user_signed_in? && @completed_skills.include?(skill)
+    return ''            unless user_signed_in?
+    return 'approved'    if @approved_skills.include?(skill)
+    return 'completed'   if @completed_skills.include?(skill)
     ''
   end
 

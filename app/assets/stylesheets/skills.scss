@@ -28,7 +28,20 @@ td.full {
 }
 
 .table-striped > tbody > tr {
-  &.read_only   { background: lighten($brand-info,    29%); }
-  &.in_progress { background: lighten($brand-warning, 25%); }
-  &.completed   { background: lighten($brand-success, 35%); }
+  &.read_only {
+    background: lighten($brand-info, 29%);
+    &:hover { background: lighten($brand-info, 24%); }
+  }
+  &.in_progress {
+    background: lighten($brand-warning, 25%);
+    &:hover { background: lighten($brand-warning, 20%); }
+  }
+  &.completed {
+    background: lighten($brand-success, 35%);
+    &:hover { background: lighten($brand-success, 30%) }
+  }
+  &.approved {
+    background: lighten($brand-success, 20%);
+    &:hover { background: lighten($brand-success, 15%); }
+  }
 }

@@ -11,7 +11,16 @@ class CoursesController < ApplicationController
   def show
     @skills = @course.skills.includes(:creator, :primary_language).order(:position)
     if user_signed_in?
-      @completed_skills = @skills.includes(:projects).select{|skill| skill.projects.any?{|project| (completion = project.completions.find_by(user_id: current_user.id)) ? completion.completed? : false}}
+      @completed_skills = @skills.includes(:projects).select do |skill|
+        skill.projects.any? do |project|
+          ( completion = project.completions.find_by(user_id: current_user.id) ) ? completion.completed? : false
+        end
+      end
+      @approved_skills = @completed_skills.select do |skill|
+        skill.projects.any? do |project|
+          project.completions.find_by(user_id: current_user.id).approved?
+        end
+      end
     end
   end
 
