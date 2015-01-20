@@ -42,6 +42,8 @@ Rails.application.routes.draw do
 
   resources :project_completions, path: '/showcases', only: [:index]
 
+  resources :enrollments, only: [:index]
+
   get 'users/profile', as: :user_profile
 
   get 'stackoverflow/tags', as: :stackoverflow_tags

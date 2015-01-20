@@ -1,0 +1,31 @@
+h2 Enrollments without users
+
+table.table.table-striped
+  tbody
+    - @enrollments.without_user.each do |enrollment|
+      tr
+        td= enrollment.full_name
+
+h2 Users without enrollments
+
+table.table.table-striped
+  tbody
+    - User.without_enrollments.order(created_at: :desc).each do |user|
+      tr
+        td= user.name
+        td= user.email
+
+h2
+  ' Enrollments that have not completed project
+  = form_tag :enrollments, method: :get, class: 'form-inline visible-lg-inline-block visible-md-inline-block visible-sm-inline-block visible-xs-block' do
+    .form-group
+      = number_field_tag :project_id, @project_id, class: 'form-control input-lg'
+
+- if @project_id.present?
+
+  table.table.table-striped
+    tbody
+      - @enrollments.with_user.without_completed_project(@project_id).each do |enrollment|
+        tr
+          td= enrollment.full_name
+          td= enrollment.user.email

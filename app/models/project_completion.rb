@@ -58,6 +58,10 @@ class ProjectCompletion < ActiveRecord::Base
     review.to_bool
   end
 
+  def unreviewed?
+    !reviewed?
+  end
+
   def review
     @review ||= github_issues.find do |issue|
       User.mentors.pluck(:username).include?(issue.user.login) &&
@@ -85,6 +89,10 @@ class ProjectCompletion < ActiveRecord::Base
     approve if approved_on_github
 
     self.approved
+  end
+
+  def unapproved?
+    !approved?
   end
 
   def approve

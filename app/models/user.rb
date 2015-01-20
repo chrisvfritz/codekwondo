@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
 
   has_many :project_completions
 
+  scope :without_enrollments, -> {
+    includes(:enrollments).where(enrollments: { user_id: nil })
+  }
+
   acts_as_voter
 
   def completed_courses
