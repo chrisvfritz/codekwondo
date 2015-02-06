@@ -49,8 +49,13 @@ class ProjectCompletion < ActiveRecord::Base
   def github_issues(options={})
     username = self.user.username
 
-    Rails.cache.fetch("github_issue: #{username}, repo: #{github_repo}, version: 2", expires_in: 30.minutes, force: options[:force]) do
-      self.user.github_api.get_request("repos/#{username}/#{github_repo}/issues?state=all").body
+    Rails.cache.fetch("github_issue: #{username}, repo: #{github_repo}, version: 3", expires_in: 30.minutes, force: options[:force]) do
+      begin
+        self.user.github_api.get_request("repos/#{username}/#{github_repo}/issues?state=all").body
+      rescue Github::Error::NotFound
+        self.destroy
+        return []
+      end
     end
   end
 
