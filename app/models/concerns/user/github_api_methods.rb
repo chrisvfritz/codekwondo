@@ -2,7 +2,7 @@ module ::Concerns::User::GithubApiMethods
   extend ActiveSupport::Concern
 
   def repos
-    self.github_api.repos.all
+    self.github_api.repos.all(sort: 'created')
   rescue
     [ OpenStruct.new(html_url: '', name: 'Unable to connect to your GitHub repos!') ]
   end
