@@ -9,8 +9,8 @@ class ProjectCompletionsController < ApplicationController
   def index
     authorize! :review, ProjectCompletion
     completed_completions = ProjectCompletion.includes(:user, :project).completed.order('updated_at ASC')
-    @unreviewed_completions = completed_completions.select(&:unreviewed?)
-    @unapproved_completions = completed_completions.select(&:reviewed?).select(&:unapproved?)
+    @unreviewed_completions = completed_completions.unreviewed
+    @unapproved_completions = completed_completions.unapproved
     # @enrollments_awaiting_completion
     # @enrollments_with_overdue_project
   end
