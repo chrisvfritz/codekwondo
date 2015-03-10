@@ -5,9 +5,9 @@ source 'https://rubygems.org'
 ruby '2.1.5'
 
 # ESSENTIALS
-gem 'rails', '4.1.8' # The version of rails we're running
-gem 'pg'             # We're using the Postgresql (PG) database
-gem 'passenger'      # Trying out passenger as a replacement for unicorn
+gem 'rails', '4.2.0'        # The version of rails we're running
+gem 'pg'                    # We're using the Postgresql (PG) database
+gem 'passenger', '~> 5.0.2' # Use the passenger web server
 
 # AR EXTENSIONS
 gem 'acts_as_list'
@@ -16,12 +16,12 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'acts-as-taggable-on', '~> 3.4'
 
 # TEMPLATING
-gem 'slim-rails', '~> 3.0.0'                                           # Use slim for HTML templates
-gem 'jbuilder', '~> 2.0'                                               # Build JSON APIs with ease
-gem 'simple_form', '~> 3.1.0.rc2', github: 'plataformatec/simple_form' # Simplifies form building
-gem 'cocoon', '~> 1.2.6'                                               # Simplifies dynamic, nested forms
-gem 'gretel', '~> 3.0.8'                                               # Simplifies breadcrumbing
-gem 'redcarpet', '~> 3.2.1'                                            # Interprets and converts markdown
+gem 'slim-rails', '~> 3.0.0'  # Use slim for HTML templates
+gem 'jbuilder', '~> 2.0'      # Build JSON APIs with ease
+gem 'simple_form', '~> 3.1.0' # Simplifies form building
+gem 'cocoon', '~> 1.2.6'      # Simplifies dynamic, nested forms
+gem 'gretel', '~> 3.0.8'      # Simplifies breadcrumbing
+gem 'redcarpet', '~> 3.2.1'   # Interprets and converts markdown
 
 # ASSET PREPARATION
 gem 'sass-rails', '~> 4.0.5'   # Use SCSS for stylesheets

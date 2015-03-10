@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20150115002826) do
   enable_extension "plpgsql"
   enable_extension "hstore"
 
-  create_table "assignments", force: true do |t|
+  create_table "assignments", force: :cascade do |t|
     t.integer  "session_assigned_id"
     t.integer  "session_due_id"
     t.integer  "project_id"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20150115002826) do
     t.datetime "updated_at"
   end
 
-  create_table "course_relationships", force: true do |t|
+  create_table "course_relationships", force: :cascade do |t|
     t.integer  "prereq_id"
     t.integer  "course_id"
     t.datetime "created_at"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150115002826) do
 
   add_index "course_relationships", ["prereq_id", "course_id"], name: "by_course_prereq_direction", unique: true, using: :btree
 
-  create_table "courses", force: true do |t|
+  create_table "courses", force: :cascade do |t|
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20150115002826) do
     t.boolean  "featured"
   end
 
-  create_table "enrollments", force: true do |t|
+  create_table "enrollments", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "preferred_name"
@@ -57,14 +57,14 @@ ActiveRecord::Schema.define(version: 20150115002826) do
   add_index "enrollments", ["first_name", "last_name", "section_id"], name: "index_enrollments_on_first_name_and_last_name_and_section_id", unique: true, using: :btree
   add_index "enrollments", ["section_id", "user_id"], name: "index_enrollments_on_section_id_and_user_id", unique: true, using: :btree
 
-  create_table "languages", force: true do |t|
+  create_table "languages", force: :cascade do |t|
     t.string   "name"
     t.string   "abbrev"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "project_completions", force: true do |t|
+  create_table "project_completions", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "user_id"
     t.string   "url"
@@ -79,14 +79,14 @@ ActiveRecord::Schema.define(version: 20150115002826) do
   add_index "project_completions", ["completed"], name: "index_project_completions_on_completed", using: :btree
   add_index "project_completions", ["project_id", "user_id"], name: "by_project_and_user", unique: true, using: :btree
 
-  create_table "project_criteria", force: true do |t|
+  create_table "project_criteria", force: :cascade do |t|
     t.integer  "project_id"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "projects", force: true do |t|
+  create_table "projects", force: :cascade do |t|
     t.integer  "skill_id"
     t.string   "title"
     t.text     "description"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20150115002826) do
     t.integer  "creator_id"
   end
 
-  create_table "resources", force: true do |t|
+  create_table "resources", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20150115002826) do
     t.integer  "creator_id"
   end
 
-  create_table "sections", force: true do |t|
+  create_table "sections", force: :cascade do |t|
     t.integer  "course_id"
     t.string   "name"
     t.datetime "created_at"
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 20150115002826) do
 
   add_index "sections", ["course_id", "name"], name: "index_sections_on_course_id_and_name", unique: true, using: :btree
 
-  create_table "sessions", force: true do |t|
+  create_table "sessions", force: :cascade do |t|
     t.integer  "section_id"
     t.datetime "start_time"
     t.datetime "end_time"
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 20150115002826) do
 
   add_index "sessions", ["section_id", "start_time"], name: "index_sessions_on_section_id_and_start_time", unique: true, using: :btree
 
-  create_table "skill_relationships", force: true do |t|
+  create_table "skill_relationships", force: :cascade do |t|
     t.integer  "prereq_id"
     t.integer  "skill_id"
     t.datetime "created_at"
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(version: 20150115002826) do
 
   add_index "skill_relationships", ["prereq_id", "skill_id"], name: "by_skill_prereq_direction", unique: true, using: :btree
 
-  create_table "skills", force: true do |t|
+  create_table "skills", force: :cascade do |t|
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 20150115002826) do
     t.boolean  "read_only",           default: false
   end
 
-  create_table "taggings", force: true do |t|
+  create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
     t.string   "taggable_type"
@@ -161,14 +161,14 @@ ActiveRecord::Schema.define(version: 20150115002826) do
   add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
   add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
 
-  create_table "tags", force: true do |t|
+  create_table "tags", force: :cascade do |t|
     t.string  "name"
     t.integer "taggings_count", default: 0
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
@@ -185,7 +185,7 @@ ActiveRecord::Schema.define(version: 20150115002826) do
     t.string   "github_token"
   end
 
-  create_table "versions", force: true do |t|
+  create_table "versions", force: :cascade do |t|
     t.string   "item_type",  null: false
     t.integer  "item_id",    null: false
     t.string   "event",      null: false
@@ -196,7 +196,7 @@ ActiveRecord::Schema.define(version: 20150115002826) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
-  create_table "votes", force: true do |t|
+  create_table "votes", force: :cascade do |t|
     t.integer  "votable_id"
     t.string   "votable_type"
     t.integer  "voter_id"
