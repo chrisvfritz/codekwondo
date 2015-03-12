@@ -9,11 +9,11 @@ class ProjectCompletion < ActiveRecord::Base
   scope :completed,   -> { where(completed: true ) }
   scope :uncompleted, -> { where(completed: false) }
 
-  scope :reviewed,   -> { where(approved: false).select { |completion|  completion.reviewed? } }
-  scope :unreviewed, -> { where(approved: false).select { |completion| !completion.reviewed? } }
+  scope :reviewed,   -> { where(approved: false).select { |completion| completion.reviewed?   } }
+  scope :unreviewed, -> { where(approved: false).select { |completion| completion.unreviewed? } }
 
-  scope :approved,   -> { select { |completion|  completion.approved? } }
-  scope :unapproved, -> { select { |completion| !completion.approved? } }
+  scope :approved,   -> { where(approved: true) }
+  scope :unapproved, -> { where(approved: false).select { |completion| completion.reviewed? && completion.unapproved? } }
 
   # scope :awaited, -> {
   #   select do |completion|
