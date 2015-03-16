@@ -10,4 +10,5 @@ $table-border-color: transparent;
 $table-bg-accent: #F1EEEE;
 
 $brand-primary: #AB9C8B;
-$link-color: #4A6EA6;
+$brand-info: lighten($navbar-inverse-bg, 12%);
+$link-color: $navbar-inverse-bg;
