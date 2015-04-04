@@ -1,3 +1,14 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600);
 
 body { font-family: 'Open Sans', Arial, Helvetica, sans-serif; }
+
+iframe { border: none; }
+
+td.dontbreak {
+  white-space: nowrap;
+  text-align: right;
+}
+
+td.full {
+  width: 100%;
+}

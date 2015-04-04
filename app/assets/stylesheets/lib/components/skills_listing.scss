@@ -1,32 +1,3 @@
-#dag {
-  @extend .well;
-  padding: 0;
-  cursor: grab;
-
-  &:active { cursor: grabbing; }
-
-  svg { display: block; }
-}
-
-.cm-s-base16-light.CodeMirror {
-  @extend .form-control;
-  height: auto;
-  // border: 1px solid #cccccc;
-  // border-radius: 4px;
-  // box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-}
-
-iframe { border: none; }
-
-td.dontbreak {
-  white-space: nowrap;
-  text-align: right;
-}
-
-td.full {
-  width: 100%;
-}
-
 .table-striped > tbody > tr {
   &.read_only {
     background: lighten($brand-info, 29%);

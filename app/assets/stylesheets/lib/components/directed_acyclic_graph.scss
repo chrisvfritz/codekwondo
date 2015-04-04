@@ -1,0 +1,9 @@
+#dag {
+  @extend .well;
+  padding: 0;
+  cursor: grab;
+
+  &:active { cursor: grabbing; }
+
+  svg { display: block; }
+}
