@@ -21,7 +21,7 @@ gem 'jbuilder', '~> 2.0'      # Build JSON APIs with ease
 gem 'simple_form', '~> 3.1.0' # Simplifies form building
 gem 'cocoon', '~> 1.2.6'      # Simplifies dynamic, nested forms
 gem 'gretel', '~> 3.0.8'      # Simplifies breadcrumbing
-gem 'redcarpet', '~> 3.2.1'   # Interprets and converts markdown
+gem 'redcarpet', '~> 3.2.3'   # Interprets and converts markdown
 
 # ASSET PREPARATION
 gem 'sass-rails', '~> 4.0.5'   # Use SCSS for stylesheets
@@ -44,7 +44,7 @@ gem 'omniauth-stackexchange', '~> 0.2.0'
 gem 'cancancan', '~> 1.9'
 
 # APIS
-gem 'rest-client', '~> 1.7.2'
+gem 'rest-client', '~> 1.8.0'
 gem 'ruby-stackoverflow', git: 'https://github.com/chrisvfritz/ruby-stackoverflow.git' # '~> 0.0.2'
 gem 'github_api'
 
